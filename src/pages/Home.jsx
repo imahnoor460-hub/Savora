@@ -1,14 +1,17 @@
 import "./Home.css";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/res.jpg";
 import storyImage from "../assets/story.jpg";
 import reserveImage from "../assets/food.jpg";
 
 function Home() {
+
   return (
     <>
     <section className="hero">
       <div className="hero-content">
+  
         <h1>Welcome to Savora</h1>
          <p> Reserve your table for an unforgettable dining experience. </p>
 
