@@ -6,6 +6,24 @@ import storyImage from "../assets/story.jpg";
 import reserveImage from "../assets/food.jpg";
 
 function Home() {
+ const [menu, setMenu] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/home/")
+      .then((response) => response.json())
+      .then((data) => {
+        setMenu(data.MenuItem);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
+   const groupedMenu = menu.reduce((acc, item) => {
+    if (!acc[item.category]) {
+      acc[item.category] = [];
+    }
+    acc[item.category].push(item);
+      return acc;
+  }, {});
 
   return (
     <>
@@ -52,57 +70,30 @@ function Home() {
 </section>
 
 <section className="home-menu">
-
   <p className="menu-subtitle">OUR MENU</p>
 
   <h2>Favorite Dishes</h2>
 
-  <div className="menu-category">
+  <div className="home-menu-grid">
+    {Object.keys(groupedMenu)
+      .slice(0, 2) // Show only first 2 categories
+      .map((category) => (
+        <div key={category} className="menu-category">
+          <h3>{category}</h3>
 
-    <h3>Appetizers</h3>
-
-    <div className="menu-item">
-      <span>Tomato Soup</span>
-      <span>$8</span>
-    </div>
-
-    <div className="menu-item">
-      <span>Garlic Bread</span>
-      <span>$6</span>
-    </div>
-
-    <div className="menu-item">
-      <span>Chicken Wings</span>
-      <span>$12</span>
-    </div>
-
-  </div>
-
-  <div className="menu-category">
-
-    <h3>Main Course</h3>
-
-    <div className="menu-item">
-      <span>Grilled Steak</span>
-      <span>$28</span>
-    </div>
-
-    <div className="menu-item">
-      <span>Creamy Pasta</span>
-      <span>$18</span>
-    </div>
-
-    <div className="menu-item">
-      <span>Chicken Alfredo</span>
-      <span>$22</span>
-    </div>
-
+          {groupedMenu[category].map((item) => (
+            <div key={item.id} className="menu-item">
+              <span>{item.name}</span>
+              <span>${item.price}</span>
+            </div>
+          ))}
+        </div>
+      ))}
   </div>
 
   <Link to="/menu" className="menu-btn">
     View Full Menu
   </Link>
-
 </section>
 
 <section className="reservation-home">

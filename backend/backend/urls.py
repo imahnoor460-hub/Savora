@@ -19,9 +19,11 @@ from django.contrib import admin
 from django.urls import path, include
 from snippets.views import ReservationAPIView
 from snippets.views import HomeAPIView
+from snippets.views import MenuAPIView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("home/", HomeAPIView.as_view()),
+     path("menu/", MenuAPIView.as_view()),
     path("reservation/", ReservationAPIView.as_view()),
 ]
