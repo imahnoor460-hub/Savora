@@ -15,11 +15,11 @@ export default function Menu() {
 
   // Category wise group
   const groupedMenu = menu.reduce((acc, item) => {
-    if (!acc[item.category]) {
-      acc[item.category] = [];
+    if (!acc[item.category_name]) {
+      acc[item.category_name] = [];
     }
 
-    acc[item.category].push(item);
+    acc[item.category_name].push(item);
 
     return acc;
   }, {});

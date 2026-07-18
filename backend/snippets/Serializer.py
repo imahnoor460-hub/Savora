@@ -10,14 +10,25 @@ class StorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Story
         fields = '__all__'
-
+        
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = "__all__"
 
 class MenuItemSerializer(serializers.ModelSerializer):
-    category = serializers.StringRelatedField()
+    category_name = serializers.CharField(source="category.name", read_only=True)
 
     class Meta:
         model = MenuItem
-        fields = '__all__'
+        fields = [
+            "id",
+            "category",
+            "category_name",
+            "name",
+            "description",
+            "price",
+        ]
 
 class ReservationSerializer(serializers.ModelSerializer):
 

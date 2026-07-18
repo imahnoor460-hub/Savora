@@ -18,10 +18,10 @@ function Home() {
   }, []);
 
    const groupedMenu = menu.reduce((acc, item) => {
-    if (!acc[item.category]) {
-      acc[item.category] = [];
+    if (!acc[item.category_name]) {
+      acc[item.category_name] = [];
     }
-    acc[item.category].push(item);
+    acc[item.category_name].push(item);
       return acc;
   }, {});
 
@@ -40,6 +40,7 @@ function Home() {
         <Link to="/menu" className="hero-button">
           View Menu
         </Link>
+
       </div>
 
       <div className="hero-image">

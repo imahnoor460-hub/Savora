@@ -1,0 +1,113 @@
+/* AdminDashboard.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f8f3eb;
+  font-family: "Poppins", sans-serif;
+}
+
+.dashboard {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+  color: #cc6b1d;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.add-btn {
+  background: #cc6b1d;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  background: #a95517;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.menu-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.menu-card:hover {
+  transform: translateY(-8px);
+}
+
+.menu-card h3 {
+  color: #333;
+  margin-bottom: 12px;
+  font-size: 24px;
+}
+
+.price {
+  color: #cc6b1d;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.edit-btn,
+.delete-btn {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.edit-btn {
+  background: #cc6b1d;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #a95517;
+}
+
+.delete-btn {
+  background: #fff4eb;
+  color: #cc6b1d;
+  border: 2px solid #cc6b1d;
+}
+
+.delete-btn:hover {
+  background: #cc6b1d;
+  color: white;
+}
