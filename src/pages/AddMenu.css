@@ -1,0 +1,70 @@
+.form-container {
+  min-height: 100vh;
+  background: #f8f3eb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px 40px;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+.form-container h1 {
+  color: #cc6b1d;
+  font-size: 32px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.form-container form {
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-container input,
+.form-container textarea,
+.form-container select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #333;
+  background: #fff;
+  outline: none;
+  font-family: inherit;
+}
+
+.form-container input:focus,
+.form-container textarea:focus,
+.form-container select:focus {
+  border-color: #cc6b1d;
+  box-shadow: 0 0 8px rgba(204, 107, 29, 0.25);
+}
+
+.form-container textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-container button[type="submit"] {
+  background: #cc6b1d;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form-container button[type="submit"]:hover {
+  background: #a95517;
+}

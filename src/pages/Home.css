@@ -321,3 +321,35 @@ padding: 15px 35px;
 .menu-btn:hover {
   background: #96492f;
 }
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 60px;
+  flex-wrap: wrap;
+}
+
+.hero-btn,
+.hero-button,
+.login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 35px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 17px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.login-btn {
+  background: #1f2937;
+  color: #fff;
+  border: 2px solid #1f2937;
+}
+
+.login-btn:hover {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
