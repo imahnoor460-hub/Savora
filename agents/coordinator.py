@@ -1,6 +1,5 @@
 from agents.menu_agent import MenuAgent
 from agents.reservation_agent import ReservationAgent
-from agents.support_agent import SupportAgent
 from agents.recommendation_agent import RecommendationAgent
 
 
@@ -9,7 +8,6 @@ class Coordinator:
     def __init__(self, session):
         self.menu = MenuAgent(session)
         self.reservation = ReservationAgent(session)
-        self.support = SupportAgent(session)
         self.recommendation = RecommendationAgent(session)
 
     async def route(self, user_message):
