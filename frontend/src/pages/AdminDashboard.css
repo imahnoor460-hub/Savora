@@ -111,3 +111,87 @@ body {
   background: #cc6b1d;
   color: white;
 }
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 1024px) {
+  .dashboard {
+    margin: 40px auto;
+  }
+
+  .dashboard-header h1 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    /* Top margin clears the absolutely positioned navbar */
+    margin: 0 auto;
+    padding: 100px 20px 50px;
+  }
+
+  /* Title and action stack instead of squeezing onto one row */
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .dashboard-header h1 {
+    font-size: clamp(1.6rem, 7.5vw, 2rem);
+  }
+
+  .add-btn {
+    width: 100%;
+    padding: 14px 20px;
+    min-height: 48px;
+  }
+
+  /* Was minmax(280px, 1fr), which could not fit a 320px screen */
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .menu-card {
+    padding: 20px 18px;
+  }
+
+  /* Hover lift is meaningless on touch and only causes jitter */
+  .menu-card:hover {
+    transform: none;
+  }
+
+  .menu-card h3 {
+    font-size: 20px;
+  }
+
+  .price {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    padding: 12px 10px;
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 380px) {
+  .dashboard {
+    padding: 96px 14px 40px;
+  }
+
+  .card-buttons {
+    gap: 10px;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .dashboard {
+    padding-top: 100px;
+  }
+}

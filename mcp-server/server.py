@@ -116,48 +116,42 @@ def create_reservation(
 
 @mcp.tool()
 def cancel_reservation(name: str, phone: str):
-    """
-    Cancel a reservation using customer's name and phone number.
-    """
 
-    try:
-        # Get all reservations
-        response = requests.get(f"{BASE_URL}/reservation/")
-        response.raise_for_status()
+    response = requests.get(f"{BASE_URL}/reservation/")
+    print("GET Status:", response.status_code)
 
-        reservations = response.json()
+    reservations = response.json()
+    print("Reservations:", reservations)
 
-        reservation_id = None
+    reservation_id = None
 
-        # Find matching reservation
-        for reservation in reservations:
-            if (
-                reservation["name"].lower() == name.lower()
-                and reservation["phone"] == phone
-            ):
-                reservation_id = reservation["id"]
-                break
+    for reservation in reservations:
+        print(reservation)
 
-        if reservation_id is None:
-            return {
-                "error": "Reservation not found."
-            }
+        if (
+            reservation["name"].lower() == name.lower()
+            and reservation["phone"] == phone
+        ):
+            reservation_id = reservation["id"]
+            break
 
-        # Delete reservation
-        delete_response = requests.delete(
-            f"{BASE_URL}/reservation/{reservation_id}/"
-        )
+    print("Matched ID:", reservation_id)
 
-        delete_response.raise_for_status()
+    if reservation_id is None:
+        return {"error": "Reservation not found"}
 
-        return {
-            "message": "Reservation cancelled successfully."
-        }
+    delete_response = requests.delete(
+        f"{BASE_URL}/reservation/{reservation_id}/"
+    )
 
-    except Exception as e:
-        return {
-            "error": str(e)
-        }
+    print("DELETE Status:", delete_response.status_code)
+    print("DELETE Response:", delete_response.text)
+
+    return {"message": "Reservation cancelled successfully"}
+
+    
+
+    
 @mcp.tool()
 def update_reservation(
     reservation_id: int,

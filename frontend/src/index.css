@@ -11,12 +11,52 @@ body,
   min-height: 100vh;
 }
 
+html,
+body {
+  /* Belt-and-braces guard: nothing should scroll the page sideways */
+  overflow-x: hidden;
+  /* Stop iOS from inflating type when a phone is rotated */
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: Arial, sans-serif;
   background: #181818;
 }
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+/* Media never outgrows its container */
+img,
+video {
+  max-width: 100%;
+}
+
+/* Long words / URLs must not push a layout wide */
+h1,
+h2,
+h3,
+h4,
+p,
+a,
+span,
+li,
+label {
+  overflow-wrap: break-word;
+}
+
+/* Form controls inherit the page font and stay inside their box.
+   16px minimum prevents iOS Safari zooming in on focus. */
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
 }

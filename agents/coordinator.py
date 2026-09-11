@@ -1,6 +1,7 @@
 from agents.menu_agent import MenuAgent
 from agents.reservation_agent import ReservationAgent
 from agents.recommendation_agent import RecommendationAgent
+from agents.support_agent import SupportAgent
 
 
 class Coordinator:
@@ -9,6 +10,7 @@ class Coordinator:
         self.menu = MenuAgent(session)
         self.reservation = ReservationAgent(session)
         self.recommendation = RecommendationAgent(session)
+        self.support = SupportAgent(session)
 
     async def route(self, user_message):
 
@@ -18,7 +20,32 @@ class Coordinator:
         if "menu" in text:
             return await self.menu.handle(text)
 
-        # Reservation
+        # Cancel Reservation (CHECK FIRST)
+        elif "cancel" in text:
+            print("Action: CANCEL")
+            return await self.reservation.handle(
+                "cancel",
+                {
+                    "message": user_message
+                }
+            )
+
+        # Update Reservation
+        elif any(word in text for word in [
+            "update",
+            "change",
+            "modify",
+            "edit"
+        ]):
+            print("Action: UPDATE")
+            return await self.reservation.handle(
+                "update",
+                {
+                    "message": user_message
+                }
+            )
+
+        # Create Reservation
         elif any(word in text for word in [
             "book",
             "booking",
@@ -26,17 +53,9 @@ class Coordinator:
             "reserve",
             "table"
         ]):
+            print("Action: CREATE")
             return await self.reservation.handle(
                 "create",
-                {
-                    "message": user_message
-                }
-            )
-
-        # Cancel Reservation
-        elif "cancel" in text:
-            return await self.reservation.handle(
-                "cancel",
                 {
                     "message": user_message
                 }

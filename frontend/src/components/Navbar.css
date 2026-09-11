@@ -1,10 +1,25 @@
+/* ---------------------------------------------
+   Navbar - base / desktop
+   --------------------------------------------- */
 .navbar {
     width: 100%;
     position: absolute;
-top: 0;
-left: 0;
-z-index: 1000;
+    top: 0;
+    left: 0;
+    z-index: 1000;
     padding: 20px 0;
+    background: #111;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* The reservation page renders the bar on a solid block.
+   Position is intentionally left as the base `absolute` so the
+   desktop layout of that page is unchanged. */
+.navbar-black {
+    background: #111;
 }
 
 .container {
@@ -15,6 +30,7 @@ z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
 }
 
 .logo a {
@@ -22,11 +38,13 @@ z-index: 1000;
     color: rgb(255, 255, 255);
     font-size: 32px;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .nav-links {
     display: flex;
     list-style: none;
+    align-items: center;
     gap: 35px;
 }
 
@@ -40,38 +58,135 @@ z-index: 1000;
 .nav-links a.active {
     color: #d4af37;
 }
-.navbar-black {
-  position: relative;
-  background: #111;
-}
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  background: #111;
+
+/* Logout sits inside the list, so it is styled to read as a nav item */
+.logout-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: rgb(255, 255, 255);
+    font-family: inherit;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 25px;
+.logout-btn:hover {
+    color: #d4af37;
 }
 
-.nav-links a {
-  color: white;
-  text-decoration: none;
+/* Hamburger - hidden on desktop, revealed at the mobile breakpoint */
+.nav-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
-.login-btn {
-  background: #d4a373;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
+.nav-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
 }
 
-.login-btn:hover {
-  background: #b8860b;
+.nav-toggle-open span:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+}
+
+.nav-toggle-open span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle-open span:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+}
+
+/* ---------------------------------------------
+   Mobile - collapse the links into a drawer.
+   The second condition catches landscape phones, which are wider
+   than 768px but still need touch-sized navigation.
+   --------------------------------------------- */
+@media (max-width: 768px), (max-height: 500px) and (orientation: landscape) {
+    .navbar {
+        padding: 12px 0;
+    }
+
+    .container {
+        width: 100%;
+        padding: 0 20px;
+        gap: 12px;
+    }
+
+    .logo a {
+        display: inline-block;
+        font-size: 26px;
+        padding: 7px 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+        flex: 0 0 auto;
+    }
+
+    /* Drawer: full width, below the bar, hidden until toggled */
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+
+        background: #111;
+        border-top: 1px solid #333;
+        padding: 8px 0;
+
+        max-height: calc(100svh - 100%);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-links-open {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    /* Full-width, comfortably tappable rows */
+    .nav-links a,
+    .logout-btn {
+        display: block;
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 17px;
+        text-align: left;
+        line-height: 1.4;
+    }
+
+    .nav-links a:active,
+    .logout-btn:active {
+        background: #1c1c1c;
+    }
+}
+
+/* Short landscape phones: tighten the drawer rows so more fit on screen */
+@media (max-height: 500px) and (orientation: landscape) {
+    .nav-links a,
+    .logout-btn {
+        padding: 11px 20px;
+    }
 }

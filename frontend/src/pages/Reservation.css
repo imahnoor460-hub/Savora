@@ -104,3 +104,98 @@
     object-fit:cover;
 
 }
+/* =============================================
+   Responsive
+   ============================================= */
+
+/* ---- Tablet ---- */
+@media (max-width: 1024px) {
+    .reservation-page {
+        gap: 40px;
+        padding: 100px 5%;
+    }
+
+    .reservation-form h1 {
+        font-size: 40px;
+    }
+
+    .reservation-page .reservation-image img {
+        height: 560px;
+    }
+}
+
+/* ---- Mobile: stack the form above the image ---- */
+@media (max-width: 768px) {
+    .reservation-page {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 32px;
+        /* Top padding clears the absolutely positioned navbar */
+        padding: 110px 20px 60px;
+    }
+
+    .reservation-subtitle {
+        margin-bottom: 10px;
+    }
+
+    .reservation-form h1 {
+        font-size: clamp(1.8rem, 8vw, 2.4rem);
+        line-height: 1.25;
+        margin-bottom: 14px;
+    }
+
+    .reservation-text {
+        max-width: 100%;
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 26px;
+    }
+
+    /* Two-up field pairs become one per row */
+    .input-row {
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group textarea {
+        width: 100%;
+        padding: 13px;
+        min-height: 48px;
+    }
+
+    .input-group textarea {
+        min-height: 110px;
+        resize: vertical;
+    }
+
+    .reservation-btn {
+        width: 100%;
+        margin-top: 18px;
+        padding: 16px 20px;
+        min-height: 50px;
+    }
+
+    .reservation-page .reservation-image img {
+        height: auto;
+        aspect-ratio: 4 / 3;
+        display: block;
+    }
+}
+
+/* ---- Small phones (320px) ---- */
+@media (max-width: 380px) {
+    .reservation-page {
+        padding: 100px 16px 48px;
+    }
+}
+
+/* ---- Short landscape phones ---- */
+@media (max-height: 500px) and (orientation: landscape) {
+    .reservation-page {
+        padding-top: 100px;
+        padding-bottom: 40px;
+    }
+}

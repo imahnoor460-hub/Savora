@@ -11,15 +11,17 @@
 
   display: flex;
   justify-content: space-between;
-   align-items: flex-start;
+  align-items: flex-start;
   gap: 40px;
   flex-wrap: nowrap;
 }
+
 .footer-logo,
 .footer-links,
 .footer-contact,
 .footer-hours {
   width: 25%;
+  min-width: 0;
 }
 
 .footer-logo h2 {
@@ -54,60 +56,10 @@
 .footer-links a:hover {
   color: #d4af37;
 }
+
 .footer-contact p {
   margin-bottom: 15px;
   color: #cfcfcf;
-}
-
-.copyright {
-  border-top: 1px solid #444;
-  margin-top: 50px;
-  padding-top: 20px;
-  text-align: center;
-  color: #bdbdbd;
-  font-size: 15px;
-}
-.navbar {
-    width: 100%;
-    position: absolute;
-top: 0;
-left: 0;
-z-index: 1000;
-    padding: 20px 0;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo a {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    font-size: 32px;
-    font-weight: bold;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 35px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    font-size: 18px;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: #d4af37;
 }
 
 .footer-hours h3 {
@@ -120,4 +72,99 @@ z-index: 1000;
   color: #cfcfcf;
   margin-bottom: 12px;
   line-height: 1.6;
+}
+
+.copyright {
+  border-top: 1px solid #444;
+  margin-top: 50px;
+  padding-top: 20px;
+  text-align: center;
+  color: #bdbdbd;
+  font-size: 15px;
+}
+
+/* ---------------------------------------------
+   Tablet - allow the four columns to wrap 2x2
+   --------------------------------------------- */
+@media (max-width: 1024px) {
+  .footer-container {
+    flex-wrap: wrap;
+    gap: 40px 30px;
+  }
+
+  .footer-logo,
+  .footer-links,
+  .footer-contact,
+  .footer-hours {
+    width: calc(50% - 15px);
+  }
+}
+
+/* ---------------------------------------------
+   Mobile - single column
+   --------------------------------------------- */
+@media (max-width: 768px) {
+  .footer {
+    padding: 50px 0 20px;
+  }
+
+  .footer-container {
+    width: 100%;
+    padding: 0 20px;
+    gap: 35px;
+  }
+
+  .footer-logo,
+  .footer-links,
+  .footer-contact,
+  .footer-hours {
+    width: 100%;
+  }
+
+  .footer-logo h2 {
+    font-size: 28px;
+    margin-bottom: 14px;
+  }
+
+  .footer-logo p {
+    max-width: 100%;
+  }
+
+  .footer-links h3,
+  .footer-contact h3,
+  .footer-hours h3 {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+
+  /* Larger hit area for the quick links */
+  .footer-links p {
+    margin-bottom: 4px;
+  }
+
+  .footer-links a {
+    display: inline-block;
+    padding: 12px 0;
+    min-height: 44px;
+  }
+
+  .copyright {
+    margin-top: 35px;
+    padding: 20px 20px 0;
+    font-size: 14px;
+  }
+}
+
+/* Landscape phones keep the 4-up footer, but the links still need
+   a touch-sized hit area. */
+@media (max-height: 500px) and (orientation: landscape) {
+  .footer-links p {
+    margin-bottom: 2px;
+  }
+
+  .footer-links a {
+    display: inline-block;
+    padding: 12px 0;
+    min-height: 44px;
+  }
 }

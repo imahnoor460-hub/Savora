@@ -78,3 +78,55 @@
 .login-footer a:hover {
   text-decoration: underline;
 }
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 768px) {
+  .login-container {
+    /* Top padding clears the absolutely positioned navbar */
+    padding: 100px 20px 50px;
+    align-items: flex-start;
+  }
+
+  /* Was a hard 400px, which overflowed a 320px screen */
+  .login-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 28px 22px;
+  }
+
+  .login-card h1 {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+    margin-bottom: 22px;
+  }
+
+  .login-card input {
+    padding: 13px;
+    min-height: 48px;
+    margin-bottom: 16px;
+  }
+
+  .login-btn {
+    padding: 14px;
+    min-height: 50px;
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 380px) {
+  .login-container {
+    padding: 96px 14px 40px;
+  }
+
+  .login-card {
+    padding: 24px 18px;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .login-container {
+    align-items: flex-start;
+    padding: 100px 20px 40px;
+  }
+}

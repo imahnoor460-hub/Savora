@@ -36,6 +36,9 @@
   background: #111;
   padding: 30px;
   border-radius: 10px;
+  /* Grid items default to min-width:auto, which refuses to shrink below the
+     longest unbroken word and blows the 1fr track past the viewport. */
+  min-width: 0;
 }
 
 .menu-section-head {
@@ -59,54 +62,142 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  min-width: 0;
 }
 
-.menu-item {
+/* The Menu page item is a stacked block: a name/price row with the
+   description beneath it. Scoped to .menu-list and declared explicitly so a
+   global `.menu-item` rule elsewhere cannot turn this <li> into a flex row
+   and pull the description up beside the price. */
+.menu-list .menu-item {
+  display: block;
   margin-bottom: 25px;
   padding-bottom: 18px;
   border-bottom: 1px solid #333;
 }
 
-.menu-item:last-child {
+.menu-list .menu-item:last-child {
   border-bottom: none;
 }
 
-.menu-item-head {
+.menu-list .menu-item-head {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
+  gap: 16px;
 }
 
-.menu-item-head span:first-child {
+/* Name takes the leftover room and may wrap; min-width:0 lets it shrink
+   below its longest word instead of pushing the price out of the row. */
+.menu-list .menu-item-head span:first-child {
   color: white;
   font-size: 20px;
   font-weight: 600;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
-.menu-item-head span:last-child {
+/* Price keeps its own width and never wraps or collides. */
+.menu-list .menu-item-head span:last-child {
   color: #d4af37;
   font-size: 20px;
   font-weight: bold;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  text-align: right;
 }
 
-.menu-item p {
+.menu-list .menu-item p {
   color: #bdbdbd;
   margin-top: 8px;
   line-height: 1.6;
   font-size: 15px;
 }
 
+/* ---- Tablet ---- */
+@media (max-width: 1024px) {
+  .menu-body {
+    gap: 30px;
+    padding: 0 40px 70px;
+  }
+}
+
+/* ---- Mobile ---- */
 @media (max-width: 768px) {
   .menu-body {
     grid-template-columns: 1fr;
-    padding: 0 25px 60px;
+    padding: 0 20px 60px;
+    gap: 20px;
+  }
+
+  /* Clears the absolutely positioned navbar */
+  .menu-hero {
+    padding: 100px 20px 40px;
   }
 
   .menu-hero h1 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 9vw, 2.5rem);
+  }
+
+  .menu-hero-note {
+    font-size: 15px;
+    margin-top: 12px;
   }
 
   .menu-section {
-    padding: 25px;
+    padding: 22px 18px;
+  }
+
+  .menu-section-head {
+    margin-bottom: 18px;
+  }
+
+  .menu-section-head h2 {
+    font-size: 24px;
+  }
+
+  .menu-list .menu-item {
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+  }
+
+  /* Keep the price on one line while the dish name wraps beneath itself */
+  .menu-list .menu-item-head {
+    gap: 12px;
+  }
+
+  .menu-list .menu-item-head span:first-child {
+    font-size: 17px;
+  }
+
+  .menu-list .menu-item-head span:last-child {
+    font-size: 17px;
+  }
+
+  .menu-list .menu-item p {
+    font-size: 14px;
+  }
+}
+
+/* ---- Small phones (320px) ---- */
+@media (max-width: 380px) {
+  .menu-body {
+    padding: 0 14px 50px;
+  }
+
+  .menu-section {
+    padding: 18px 14px;
+  }
+
+  .menu-list .menu-item-head {
+    gap: 10px;
+  }
+}
+
+/* ---- Short landscape phones ---- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .menu-hero {
+    padding: 90px 20px 30px;
   }
 }

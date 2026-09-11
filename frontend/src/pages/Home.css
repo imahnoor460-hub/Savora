@@ -286,7 +286,7 @@ padding: 15px 35px;
   padding-bottom: 5px;
 }
 
-.menu-item {
+.home-menu .menu-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -294,12 +294,12 @@ padding: 15px 35px;
   border-bottom: 1px solid #ffffff;
 }
 
-.menu-item span:first-child {
+.home-menu .menu-item span:first-child {
   font-size: 18px;
   color: #ffffff;
 }
 
-.menu-item span:last-child {
+.home-menu .menu-item span:last-child {
   font-size: 18px;
   color: #b8860b;
   font-weight: 600;
@@ -352,4 +352,282 @@ padding: 15px 35px;
   background: transparent;
   color: #fff;
   border-color: #fff;
+}
+/* =============================================
+   Responsive
+   ============================================= */
+
+/* ---- Tablet: pull in the very wide section padding ---- */
+@media (max-width: 1024px) {
+  .story,
+  .reservation-home,
+  .home-menu {
+    padding: 80px 60px;
+  }
+
+  .story,
+  .reservation-home {
+    gap: 40px;
+  }
+
+  .story-content h2 {
+    font-size: 40px;
+  }
+
+  .reservation-form h2 {
+    font-size: 38px;
+  }
+
+  .home-menu h2 {
+    font-size: 38px;
+  }
+
+  .story-image img,
+  .reservation-home .reservation-image img {
+    height: 520px;
+  }
+}
+
+/* ---- Mobile: stack every split section ---- */
+@media (max-width: 768px) {
+  /* Hero -------------------------------------------------- */
+  .hero {
+    height: 100svh;
+    min-height: 480px;
+  }
+
+  .hero-content {
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    max-width: none;
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .hero-content p {
+    margin-top: 10px;
+    font-size: clamp(0.98rem, 4vw, 1.15rem);
+    line-height: 1.6;
+  }
+
+  /* The two hero links have no wrapper element, so the spacing
+     that used to come from margin-top:100px is set here instead. */
+  .hero-btn {
+    margin-top: 30px;
+    margin-right: 0;
+  }
+
+  .hero-button {
+    margin-top: 14px;
+  }
+
+  .hero-btn,
+  .hero-button {
+    width: auto;
+    padding: 14px 28px;
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  /* Story ------------------------------------------------- */
+  .story {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+    padding: 60px 20px;
+  }
+
+  .story-content h2 {
+    font-size: clamp(1.6rem, 7vw, 2.1rem);
+    margin-bottom: 18px;
+  }
+
+  .story-content p {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .story-image img {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    display: block;
+  }
+
+  /* Home menu --------------------------------------------- */
+  .home-menu {
+    padding: 60px 20px;
+  }
+
+  .home-menu h2 {
+    font-size: clamp(1.6rem, 7vw, 2.1rem);
+    margin-bottom: 32px;
+  }
+
+  .home-menu-grid {
+    display: block;
+  }
+
+  .menu-category {
+    margin-bottom: 34px;
+  }
+
+  .menu-category h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  /* Let a long dish name wrap without shoving the price out */
+  .home-menu .menu-item {
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+  }
+
+  .home-menu .menu-item span:first-child {
+    font-size: 16px;
+    min-width: 0;
+  }
+
+  .home-menu .menu-item span:last-child {
+    font-size: 16px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .menu-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 28px;
+    padding: 15px 20px;
+    min-height: 48px;
+  }
+
+  /* Reservation block ------------------------------------- */
+  .reservation-home {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+    padding: 60px 20px;
+  }
+
+  .reservation-form h2 {
+    font-size: clamp(1.6rem, 7vw, 2.1rem);
+    margin-bottom: 22px;
+  }
+
+  /* Date/time inputs have an intrinsic minimum width that is wider
+     than their flex share, so they need permission to shrink. */
+  .reservation-home .date-time {
+    gap: 14px;
+  }
+
+  .reservation-home .date-time div {
+    min-width: 0;
+  }
+
+  .reservation-home .date-time input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .reservation-home .reservation-form input,
+  .reservation-home .reservation-form select {
+    padding: 13px;
+    min-height: 48px;
+  }
+
+  .reserve-btn {
+    margin-top: 18px;
+    min-height: 50px;
+  }
+
+  /* Scoped so it wins over the .reservation-image rule that the
+     Reservation page stylesheet declares later in the bundle. */
+  .reservation-home .reservation-image img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    display: block;
+  }
+}
+
+/* ---- Small phones (320px) ---- */
+@media (max-width: 380px) {
+  .story,
+  .home-menu,
+  .reservation-home {
+    padding: 48px 16px;
+  }
+
+  .hero-content {
+    padding: 0 16px;
+  }
+
+  .hero-btn,
+  .hero-button {
+    width: 100%;
+    padding: 14px 18px;
+  }
+
+  .home-menu .menu-item {
+    gap: 10px;
+  }
+
+  /* Below ~380px the two date/time fields cannot share a row */
+  .reservation-home .date-time {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* ---- Short landscape phones: the hero must not clip ---- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    height: auto;
+    min-height: 100svh;
+    display: flex;
+  }
+
+  .hero-content {
+    position: relative;
+    top: auto;
+    left: 0;
+    transform: none;
+    padding: 90px 24px 40px;
+  }
+
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+  }
+
+  .hero-content h1 {
+    font-size: 1.9rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .hero-btn {
+    margin-top: 18px;
+  }
+
+  .hero-button {
+    margin-top: 10px;
+  }
 }
