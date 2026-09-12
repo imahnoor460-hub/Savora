@@ -33,3 +33,7 @@ env/
 
 # Database
 db.sqlite3
+db.sqlite3.bak-*
+
+# Uploaded media (menu item photos)
+media/

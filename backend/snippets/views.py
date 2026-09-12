@@ -20,10 +20,14 @@ class HomeAPIView(APIView):
         story = Story.objects.first()
         menu = MenuItem.objects.all()
 
+        # `request` in the context makes MenuItemSerializer emit absolute image
+        # URLs, which the React app (served from another origin) needs.
         return Response({
             "hero": HeroSerializer(hero).data,
             "story": StorySerializer(story).data,
-            "MenuItem": MenuItemSerializer(menu, many=True).data,
+            "MenuItem": MenuItemSerializer(
+                menu, many=True, context={"request": request}
+            ).data,
         })
 
 

@@ -1,123 +1,262 @@
-.form-container {
-  min-height: 100vh;
-  background: #f8f3eb;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 20px 40px;
-  font-family: "Poppins", Arial, sans-serif;
+/* --- Savora Edit / Add Menu Form CSS --- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.form-container h1 {
-  color: #cc6b1d;
-  font-size: 32px;
-  margin-bottom: 25px;
+body {
+  background-color: #0d0f12; /* Savora Dark Background */
+  color: #f3f4f6;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Page Container - Margin top increased to prevent overlapping with navbar */
+.edit-container, .form-container {
+  max-width: 700px;
+  margin: 100px auto 50px auto;
+  padding: 20px;
+}
+
+/* Page Title */
+.edit-container h1, .form-container h1, 
+.edit-title, .form-title {
+  color: #dfbc73; /* Savora Gold Heading */
+  font-size: 36px;
+  font-weight: 700;
   text-align: center;
+  margin-bottom: 35px;
 }
 
-.form-container form {
-  width: 100%;
-  max-width: 480px;
-  background: #fff;
+/* Form Card Box.
+   Scoped to the admin containers: these used to be bare `form` / `input` /
+   `label` selectors, which leaked into every other page of the site. */
+.edit-container form,
+.form-container form,
+.edit-card, .form-card {
+  background: #14161c; /* Luxury Dark Card Tone */
+  border: 1px solid rgba(223, 188, 115, 0.25);
+  border-radius: 16px;
   padding: 35px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
 }
 
-.form-container input,
+/* Input Fields, Textareas, and Dropdowns */
+.edit-container input[type="text"],
+.edit-container input[type="number"],
+.edit-container input[type="email"],
+.edit-container textarea,
+.edit-container select,
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container input[type="email"],
 .form-container textarea,
 .form-container select {
   width: 100%;
-  padding: 12px 14px;
-  border: 1px solid #ddd;
+  background-color: #0d0f12;
+  border: 1px solid rgba(223, 188, 115, 0.3);
   border-radius: 8px;
+  padding: 14px 16px;
+  color: #f3f4f6;
   font-size: 15px;
-  color: #333;
-  background: #fff;
-  outline: none;
-  font-family: inherit;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
 }
 
+.edit-container input:focus,
+.edit-container textarea:focus,
+.edit-container select:focus,
 .form-container input:focus,
 .form-container textarea:focus,
 .form-container select:focus {
-  border-color: #cc6b1d;
-  box-shadow: 0 0 8px rgba(204, 107, 29, 0.25);
+  outline: none;
+  border-color: #dfbc73;
+  box-shadow: 0 0 8px rgba(223, 188, 115, 0.2);
 }
 
-.form-container textarea {
-  min-height: 100px;
-  resize: vertical;
+/* Placeholder Styling */
+.edit-container input::placeholder,
+.edit-container textarea::placeholder,
+.form-container input::placeholder,
+.form-container textarea::placeholder {
+  color: #6b7280;
 }
 
-.form-container button[type="submit"] {
-  background: #cc6b1d;
-  color: #fff;
+/* Dropdown Arrow Color Fix */
+.edit-container select,
+.form-container select {
+  cursor: pointer;
+}
+
+.edit-container select option,
+.form-container select option {
+  background-color: #14161c;
+  color: #f3f4f6;
+}
+
+/* Submit / Update Button */
+.edit-container button[type="submit"],
+.form-container button[type="submit"],
+.submit-btn,
+.update-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #dfbc73 0%, #b89742 100%);
+  color: #0d0f12;
   border: none;
   padding: 14px;
   border-radius: 8px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(223, 188, 115, 0.25);
+  margin-top: 10px;
 }
 
-.form-container button[type="submit"]:hover {
-  background: #a95517;
+.edit-container button[type="submit"]:hover,
+.form-container button[type="submit"]:hover,
+.submit-btn:hover,
+.update-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(223, 188, 115, 0.4);
+  background: linear-gradient(135deg, #e5c782 0%, #c5a059 100%);
+}
+
+/* Labels */
+.edit-container label,
+.form-container label {
+  display: block;
+  color: #dfbc73;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* Chef's Recommendation toggle.
+   Scoped to the containers so it outranks the `.form-container label` rule
+   above, which would otherwise force display:block and kill the flex row. */
+.edit-container .checkbox-row,
+.form-container .checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  color: #dfbc73;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #dfbc73;
+  cursor: pointer;
+}
+
+/* Menu item image picker */
+.image-field {
+  margin-bottom: 20px;
+}
+
+.image-field label {
+  display: block;
+  color: #dfbc73;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.image-field input[type="file"] {
+  width: 100%;
+  background-color: #0d0f12;
+  border: 1px solid rgba(223, 188, 115, 0.3);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #f3f4f6;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+}
+
+.image-field input[type="file"]::file-selector-button {
+  background: rgba(223, 188, 115, 0.15);
+  border: 1px solid rgba(223, 188, 115, 0.4);
+  color: #dfbc73;
+  border-radius: 6px;
+  padding: 7px 14px;
+  margin-right: 12px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+}
+
+.image-preview {
+  margin-top: 14px;
+}
+
+.image-preview img {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(223, 188, 115, 0.3);
+  display: block;
+}
+
+.image-preview-caption,
+.image-empty {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.image-error {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #e5736f;
+}
+
+.image-clear-btn {
+  margin-top: 12px;
+  background: transparent;
+  border: 1px solid rgba(223, 188, 115, 0.35);
+  color: #dfbc73;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.image-clear-btn:hover {
+  border-color: #dfbc73;
+  background: rgba(223, 188, 115, 0.1);
 }
 
 /* =============================================
-   Responsive
+   Responsive Design
    ============================================= */
 @media (max-width: 768px) {
-  .form-container {
-    padding: 100px 20px 50px;
-    justify-content: flex-start;
-  }
-
-  .form-container h1 {
-    font-size: clamp(1.5rem, 7vw, 2rem);
-    margin-bottom: 20px;
-  }
-
-  .form-container form {
-    padding: 24px 20px;
-    gap: 15px;
-  }
-
-  .form-container input,
-  .form-container textarea,
-  .form-container select {
-    padding: 13px;
-    min-height: 48px;
-  }
-
-  .form-container textarea {
-    min-height: 110px;
-  }
-
-  .form-container button[type="submit"] {
+  .edit-container, .form-container {
+    max-width: 700px;
+    margin: 90px auto 40px auto; 
     padding: 15px;
-    min-height: 50px;
-  }
-}
-
-@media (max-width: 380px) {
-  .form-container {
-    padding: 96px 14px 40px;
   }
 
-  .form-container form {
-    padding: 20px 16px;
+  form, .edit-card, .form-card {
+    background: #14161c;
+    border: 1px solid rgba(223, 188, 115, 0.25);
+    border-radius: 16px;
+    padding: 25px 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
   }
-}
 
-@media (max-height: 500px) and (orientation: landscape) {
-  .form-container {
-    justify-content: flex-start;
-    padding: 100px 20px 40px;
+  .edit-container h1, .form-container h1 {
+    font-size: 28px;
+    margin-bottom: 25px;
   }
 }

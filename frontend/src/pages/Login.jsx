@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import { API_BASE, saveTokens } from "../api";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -12,7 +13,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/login/", {
+      const response = await fetch(`${API_BASE}/api/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +28,9 @@ export default function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem("token", data.access);
+        // Keep the refresh token too, so an expired access token can be
+        // renewed instead of breaking the next admin save.
+        saveTokens(data);
         alert("Login Successful");
         navigate("/admin");
       } else {

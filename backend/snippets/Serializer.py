@@ -28,6 +28,12 @@ class MenuItemSerializer(serializers.ModelSerializer):
             "name",
             "description",
             "price",
+            "composition",
+            "energy",
+            "allergens",
+            "pairing",
+            "is_chef_recommendation",
+            "image",
         ]
 
 class ReservationSerializer(serializers.ModelSerializer):

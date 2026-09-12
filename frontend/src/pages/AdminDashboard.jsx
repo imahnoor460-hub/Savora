@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
+import { API_BASE, apiFetch, getErrorMessage } from "../api";
 
 export default function AdminDashboard() {
   const [menu, setMenu] = useState([]);
@@ -12,7 +13,7 @@ export default function AdminDashboard() {
 
   const fetchMenu = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/menu/");
+      const response = await fetch(`${API_BASE}/menu/`);
 
       if (!response.ok) {
         console.error("Failed to fetch menu:", response.status);
@@ -20,15 +21,13 @@ export default function AdminDashboard() {
       }
 
       const data = await response.json();
-      setMenu(data);
+      setMenu(Array.isArray(data) ? data : data.results || []);
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleDelete = async (id) => {
-    const token = localStorage.getItem("token");
-
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this menu item?"
     );
@@ -36,22 +35,22 @@ export default function AdminDashboard() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://127.0.0.1:8000/menu/${id}/`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await apiFetch(`/menu/${id}/`, { method: "DELETE" });
 
       if (response.ok) {
         alert("Menu item deleted successfully!");
         fetchMenu();
-      } else {
-        alert("Delete failed.");
+        return;
       }
+
+      const message = await getErrorMessage(response);
+      console.error("Menu delete failed:", response.status, message);
+      alert(`Delete failed\n\n${message}`);
+
+      if (response.status === 401) navigate("/login");
     } catch (error) {
       console.error(error);
-      alert("Server Error");
+      alert("Unable to connect to server.");
     }
   };
 
@@ -71,6 +70,10 @@ export default function AdminDashboard() {
       <div className="menu-grid">
         {menu.map((item) => (
           <div className="menu-card" key={item.id}>
+            {item.image && (
+              <img className="card-thumb" src={item.image} alt={item.name} />
+            )}
+
             <h3>{item.name}</h3>
 
             <p className="price">${item.price}</p>

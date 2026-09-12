@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Reservation.css";
-import reserveImage from "../assets/food.jpg";
+import reserveImage from "../assets/reservation.jpg";
 
 export default function Reservation() {
   const [name, setName] = useState("");

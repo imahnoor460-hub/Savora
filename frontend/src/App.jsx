@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
+import Story from "./pages/Story";
 import Reservation from "./pages/Reservation";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -20,6 +21,7 @@ function AppLayout() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/story" element={<Story />} />
         <Route path="/reservation" element={<Reservation />} />
          <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<AdminDashboard />} />

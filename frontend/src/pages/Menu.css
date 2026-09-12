@@ -1,203 +1,330 @@
-.menu-page {
-  background: #000;
+.savora-menu-page {
+  background-color: #0b0b0b;
+  color: #f3f0ea;
   min-height: 100vh;
+  font-family: 'Cinzel', 'Georgia', serif;
+  overflow-x: hidden;
+  padding-bottom: 80px;
 }
 
-.menu-hero {
-  background: #000;
-  color: white;
-  text-align: center;
-  padding: 80px 20px 60px;
+/* Top Category Pills Navigation */
+.savora-cat-nav {
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  background: rgba(11, 11, 11, 0.95);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
 }
 
-.menu-hero h1 {
-  font-size: 3.2rem;
-  font-weight: 600;
-  color: #d4af37;
-  margin-top: 10px;
+.savora-cat-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  gap: 16px;
+  padding: 16px 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
-.menu-hero-note {
-  color: #cfcfcf;
-  font-style: italic;
-  margin-top: 15px;
-  font-size: 17px;
+.savora-cat-container::-webkit-scrollbar {
+  display: none;
 }
 
-.menu-body {
-  background: #000;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-  padding: 0 100px 80px;
-}
-
-.menu-section {
-  background: #111;
-  padding: 30px;
-  border-radius: 10px;
-  /* Grid items default to min-width:auto, which refuses to shrink below the
-     longest unbroken word and blows the 1fr track past the viewport. */
-  min-width: 0;
-}
-
-.menu-section-head {
-  margin-bottom: 25px;
-}
-
-.menu-section-head h2 {
-  font-size: 30px;
-  color: #d4af37;
-  margin-bottom: 8px;
-}
-
-.menu-section-head p {
-  color: #cfcfcf;
-  font-size: 14px;
-  letter-spacing: 2px;
+.savora-pill {
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #a39e93;
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  font-family: inherit;
   text-transform: uppercase;
 }
 
-.menu-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  min-width: 0;
+.savora-pill:hover,
+.savora-pill.active {
+  background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+  color: #0b0b0b;
+  border-color: #d4af37;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
 }
 
-/* The Menu page item is a stacked block: a name/price row with the
-   description beneath it. Scoped to .menu-list and declared explicitly so a
-   global `.menu-item` rule elsewhere cannot turn this <li> into a flex row
-   and pull the description up beside the price. */
-.menu-list .menu-item {
-  display: block;
-  margin-bottom: 25px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid #333;
+/* Main Section Layout */
+.savora-section {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px 24px;
 }
 
-.menu-list .menu-item:last-child {
-  border-bottom: none;
-}
-
-.menu-list .menu-item-head {
+.savora-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-end;
+  margin-bottom: 50px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 24px;
+}
+
+.savora-kicker {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #d4af37;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.savora-title {
+  font-size: 38px;
+  font-weight: 400;
+  color: #f3f0ea;
+  margin: 0;
+  font-family: 'Cinzel', serif;
+}
+
+.savora-desc {
+  color: #8a8f98;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  max-width: 300px;
+  text-align: right;
+  font-family: sans-serif;
+}
+
+/* Grid Layout */
+.savora-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 50px;
+  align-items: start;
+}
+
+/* Menu Items List */
+.savora-list {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
-/* Name takes the leftover room and may wrap; min-width:0 lets it shrink
-   below its longest word instead of pushing the price out of the row. */
-.menu-list .menu-item-head span:first-child {
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  flex: 1 1 auto;
-  min-width: 0;
-  overflow-wrap: anywhere;
+.savora-row {
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 24px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-family: inherit;
 }
 
-/* Price keeps its own width and never wraps or collides. */
-.menu-list .menu-item-head span:last-child {
+.savora-row:hover,
+.savora-row.active {
+  background: rgba(25, 25, 25, 0.9);
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: translateX(4px);
+}
+
+.savora-row-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.savora-name {
+  font-size: 20px;
+  color: #f3f0ea;
+  font-weight: 500;
+}
+
+.savora-line {
+  flex-grow: 1;
+  border-bottom: 1px dotted rgba(212, 175, 55, 0.3);
+  margin: 0 15px;
+}
+
+.savora-price {
+  font-size: 18px;
   color: #d4af37;
+  font-weight: 600;
+}
+
+.savora-note {
+  font-size: 13px;
+  color: #9a958c;
+  display: block;
+  margin-bottom: 14px;
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+.savora-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #6b665c;
+  font-family: sans-serif;
+}
+
+.savora-meta .gold {
+  color: #d4af37;
+  font-weight: 600;
+}
+
+/* Right Sticky Showcase Card */
+.savora-sticky-wrap {
+  position: sticky;
+  top: 100px;
+}
+
+.savora-card {
+  background: linear-gradient(145deg, #141414 0%, #0d0d0d 100%);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  transition: transform 0.1s ease-out;
+}
+
+.savora-card-top-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #d4af37;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-family: sans-serif;
+}
+
+.savora-plate-wrap {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.savora-plate-base {
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+}
+
+.savora-plate-img {
+  width: 210px;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+.savora-card-content {
+  text-align: center;
+}
+
+.savora-card-title {
+  font-size: 24px;
+  margin: 0 0 8px 0;
+  color: #f3f0ea;
+}
+
+.savora-card-price {
   font-size: 20px;
-  font-weight: bold;
-  flex: 0 0 auto;
-  white-space: nowrap;
-  text-align: right;
+  color: #d4af37;
+  font-weight: 600;
+  margin-bottom: 14px;
 }
 
-.menu-list .menu-item p {
-  color: #bdbdbd;
-  margin-top: 8px;
+.savora-card-text {
+  font-size: 13px;
+  color: #9a958c;
+  font-family: sans-serif;
   line-height: 1.6;
-  font-size: 15px;
+  margin-bottom: 20px;
 }
 
-/* ---- Tablet ---- */
-@media (max-width: 1024px) {
-  .menu-body {
-    gap: 30px;
-    padding: 0 40px 70px;
-  }
+.savora-stats {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 25px;
+  font-family: sans-serif;
 }
 
-/* ---- Mobile ---- */
-@media (max-width: 768px) {
-  .menu-body {
+.savora-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: #6b665c;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-val {
+  font-size: 12px;
+  color: #f3f0ea;
+  font-weight: 600;
+}
+
+.savora-btn {
+  background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+  color: #0b0b0b;
+  border: none;
+  width: 100%;
+  padding: 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-family: inherit;
+}
+
+.savora-btn:hover {
+  opacity: 0.9;
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+  .savora-grid {
     grid-template-columns: 1fr;
-    padding: 0 20px 60px;
-    gap: 20px;
   }
-
-  /* Clears the absolutely positioned navbar */
-  .menu-hero {
-    padding: 100px 20px 40px;
+  .savora-sticky-wrap {
+    position: relative;
+    top: 0;
   }
-
-  .menu-hero h1 {
-    font-size: clamp(2rem, 9vw, 2.5rem);
+  .savora-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
   }
-
-  .menu-hero-note {
-    font-size: 15px;
-    margin-top: 12px;
-  }
-
-  .menu-section {
-    padding: 22px 18px;
-  }
-
-  .menu-section-head {
-    margin-bottom: 18px;
-  }
-
-  .menu-section-head h2 {
-    font-size: 24px;
-  }
-
-  .menu-list .menu-item {
-    margin-bottom: 18px;
-    padding-bottom: 14px;
-  }
-
-  /* Keep the price on one line while the dish name wraps beneath itself */
-  .menu-list .menu-item-head {
-    gap: 12px;
-  }
-
-  .menu-list .menu-item-head span:first-child {
-    font-size: 17px;
-  }
-
-  .menu-list .menu-item-head span:last-child {
-    font-size: 17px;
-  }
-
-  .menu-list .menu-item p {
-    font-size: 14px;
-  }
-}
-
-/* ---- Small phones (320px) ---- */
-@media (max-width: 380px) {
-  .menu-body {
-    padding: 0 14px 50px;
-  }
-
-  .menu-section {
-    padding: 18px 14px;
-  }
-
-  .menu-list .menu-item-head {
-    gap: 10px;
-  }
-}
-
-/* ---- Short landscape phones ---- */
-@media (max-height: 500px) and (orientation: landscape) {
-  .menu-hero {
-    padding: 90px 20px 30px;
+  .savora-desc {
+    text-align: left;
+    max-width: 100%;
   }
 }

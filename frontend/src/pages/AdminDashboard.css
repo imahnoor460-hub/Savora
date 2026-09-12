@@ -1,4 +1,4 @@
-/* AdminDashboard.css */
+/* --- Savora AdminDashboard.css --- */
 
 * {
   margin: 0;
@@ -7,14 +7,15 @@
 }
 
 body {
-  background: #f8f3eb;
+  background-color: #0d0f12; /* Savora Exact Dark Background */
+  color: #f3f4f6;
   font-family: "Poppins", sans-serif;
 }
 
 .dashboard {
   max-width: 1200px;
-  margin: 50px auto;
-  padding: 20px;
+  margin: 40px auto;
+  padding: 40px 20px;
 }
 
 .dashboard-header {
@@ -22,27 +23,32 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .dashboard-header h1 {
-  color: #cc6b1d;
-  font-size: 40px;
+  color: #dfbc73; /* Savora Gold Heading Color */
+  font-size: 38px;
   font-weight: 700;
 }
 
 .add-btn {
-  background: #cc6b1d;
-  color: white;
+  background: linear-gradient(135deg, #dfbc73 0%, #b89742 100%);
+  color: #0d0f12;
   border: none;
   padding: 12px 28px;
   border-radius: 8px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(223, 188, 115, 0.2);
 }
 
 .add-btn:hover {
-  background: #a95517;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(223, 188, 115, 0.4);
 }
 
 .menu-grid {
@@ -52,25 +58,37 @@ body {
 }
 
 .menu-card {
-  background: #fff;
+  background: #14161c; /* Luxury Card Dark Tone */
+  border: 1px solid rgba(223, 188, 115, 0.25);
   border-radius: 15px;
   padding: 25px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   transition: 0.3s;
 }
 
 .menu-card:hover {
   transform: translateY(-8px);
+  border-color: #dfbc73;
+}
+
+.card-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(223, 188, 115, 0.2);
+  margin-bottom: 16px;
+  display: block;
 }
 
 .menu-card h3 {
-  color: #333;
+  color: #ffffff;
   margin-bottom: 12px;
   font-size: 24px;
 }
 
 .price {
-  color: #cc6b1d;
+  color: #dfbc73; /* Gold Price Tag */
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 20px;
@@ -89,34 +107,35 @@ body {
   border-radius: 8px;
   cursor: pointer;
   font-size: 15px;
+  font-weight: 600;
   transition: 0.3s;
 }
 
 .edit-btn {
-  background: #cc6b1d;
-  color: white;
+  background: #dfbc73;
+  color: #0d0f12;
 }
 
 .edit-btn:hover {
-  background: #a95517;
+  background: #c5a059;
 }
 
 .delete-btn {
-  background: #fff4eb;
-  color: #cc6b1d;
-  border: 2px solid #cc6b1d;
+  background: transparent;
+  color: #dfbc73;
+  border: 1.5px solid #dfbc73;
 }
 
 .delete-btn:hover {
-  background: #cc6b1d;
-  color: white;
+  background: rgba(223, 188, 115, 0.15);
 }
+
 /* =============================================
    Responsive
    ============================================= */
 @media (max-width: 1024px) {
   .dashboard {
-    margin: 40px auto;
+    margin: 30px auto;
   }
 
   .dashboard-header h1 {
@@ -126,30 +145,25 @@ body {
 
 @media (max-width: 768px) {
   .dashboard {
-    /* Top margin clears the absolutely positioned navbar */
-    margin: 0 auto;
-    padding: 100px 20px 50px;
+    padding: 30px 15px;
   }
 
-  /* Title and action stack instead of squeezing onto one row */
   .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 28px;
   }
 
   .dashboard-header h1 {
-    font-size: clamp(1.6rem, 7.5vw, 2rem);
+    font-size: 24px;
   }
 
   .add-btn {
-    width: 100%;
-    padding: 14px 20px;
-    min-height: 48px;
+    padding: 10px 16px;
+    font-size: 14px;
   }
 
-  /* Was minmax(280px, 1fr), which could not fit a 320px screen */
   .menu-grid {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -159,39 +173,7 @@ body {
     padding: 20px 18px;
   }
 
-  /* Hover lift is meaningless on touch and only causes jitter */
   .menu-card:hover {
     transform: none;
-  }
-
-  .menu-card h3 {
-    font-size: 20px;
-  }
-
-  .price {
-    font-size: 20px;
-    margin-bottom: 16px;
-  }
-
-  .edit-btn,
-  .delete-btn {
-    padding: 12px 10px;
-    min-height: 48px;
-  }
-}
-
-@media (max-width: 380px) {
-  .dashboard {
-    padding: 96px 14px 40px;
-  }
-
-  .card-buttons {
-    gap: 10px;
-  }
-}
-
-@media (max-height: 500px) and (orientation: landscape) {
-  .dashboard {
-    padding-top: 100px;
   }
 }

@@ -1,45 +1,80 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="custom-footer">
       <div className="footer-container">
-
-        <div className="footer-logo">
-          <h2>Savora</h2>
-          <p>
-            Experience delicious food and reserve your table for an unforgettable dining experience.
+        {/* Brand & Address */}
+        <div className="footer-column">
+          <div className="footer-brand">SAVORA</div>
+          <p className="footer-address">
+            12 Aurelia Court, Mayfair
+            <br />
+            London W1K 4QJ
           </p>
         </div>
 
-        <div className="footer-links">
-          <h3>Quick Links</h3>
-
-          <p><Link to="/">Home</Link></p>
-          <p><Link to="/menu">Menu</Link></p>
-          <p><Link to="/about">About</Link></p>
-          <p><Link to="/reservation">Reservation</Link></p>
+        {/* Hours */}
+        <div className="footer-column">
+          <div className="footer-heading">Hours</div>
+          <div className="hours-list">
+            <div className="hours-row">
+              <span className="day">Tue — Thu</span>
+              <span className="dot-filler"></span>
+              <span className="time">18:00 — 23:00</span>
+            </div>
+            <div className="hours-row">
+              <span className="day">Fri — Sat</span>
+              <span className="dot-filler"></span>
+              <span className="time">18:00 — 01:00</span>
+            </div>
+            <div className="hours-row">
+              <span className="day">Sunday</span>
+              <span className="dot-filler"></span>
+              <span className="time">13:00 — 16:00</span>
+            </div>
+            <div className="hours-row">
+              <span className="day">Monday</span>
+              <span className="dot-filler"></span>
+              <span className="time closed">Closed</span>
+            </div>
+          </div>
         </div>
 
-        <div className="footer-contact">
-          <h3>Contact</h3>
-
-          <p>📍 Lahore, Pakistan</p>
-          <p>📞 +92 300 1234567</p>
-          <p>✉️ info@savora.com</p>
+        {/* Contact */}
+        <div className="footer-column">
+          <div className="footer-heading">Contact</div>
+          <div className="contact-list">
+            <a href="tel:+442079460918" className="footer-link">
+              +44 20 7946 0918
+            </a>
+            <a href="mailto:reserve@savora.com" className="footer-link">
+              reserve@savora.com
+            </a>
+            <span className="subtext">Enquiries answered within 24h</span>
+          </div>
         </div>
 
-<div className="footer-hours">
-  <h3>Opening Hours</h3>
+        {/* Reservations */}
+        <div className="footer-column">
+          <div className="footer-heading">Reservations</div>
+          <p className="footer-text">
+            Bookings open on the first of each month, 09:00 GMT.
+          </p>
+          <Link to="/reservation">
+            <button type="button" className="btn-join-list">
+              Join the List
+            </button>
+          </Link>
+        </div>
+      </div>
 
-  <p>Monday - Friday: 11:00 AM – 10:00 PM</p>
-  <p>Saturday: 12:00 PM – 11:00 PM</p>
-  <p>Sunday: 12:00 PM – 9:00 PM</p>
-</div>
-</div>
-      <div className="copyright">
-        © {new Date().getFullYear()} Savora. All Rights Reserved.
+      {/* Footer Bottom Bar */}
+      <div className="footer-bottom">
+        <span>© 2026 Savora Restaurant</span>
+        <span>Mayfair · London</span>
       </div>
     </footer>
   );

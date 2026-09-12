@@ -133,6 +133,21 @@ REST_FRAMEWORK = {
 }
 
 
+# Simple JWT
+#
+# The default access token lifetime is only 5 minutes, which expired while an
+# admin was still filling in the edit form and made every save return 401.
+# The frontend refreshes the access token using the refresh token.
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+}
+
+
 # Default primary key field type
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
@@ -11,9 +11,6 @@ function Navbar() {
 
   const token = localStorage.getItem("token");
 
-  // Close the mobile menu whenever the route changes, including on
-  // browser back/forward. Adjusting state during render instead of in
-  // an effect avoids a second render pass with the menu still open.
   if (lastPath !== location.pathname) {
     setLastPath(location.pathname);
     setMenuOpen(false);
@@ -26,24 +23,19 @@ function Navbar() {
   };
 
   return (
-    <nav
-      className={
-        location.pathname === "/reservation"
-          ? "navbar navbar-black"
-          : "navbar"
-      }
-    >
-      <div className="container">
-        <div className="logo">
-          <NavLink to="/">Savora</NavLink>
-        </div>
+    <nav className="savora-navbar">
+      <div className="navbar-container">
+        {/* Brand / Logo */}
+        <NavLink to="/" className="navbar-brand">
+          <span className="brand-icon">S</span>
+          <span className="brand-title">SAVORA</span>
+        </NavLink>
 
+        {/* Mobile Toggle Button */}
         <button
           type="button"
           className={menuOpen ? "nav-toggle nav-toggle-open" : "nav-toggle"}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          aria-controls="primary-navigation"
           onClick={() => setMenuOpen((open) => !open)}
         >
           <span></span>
@@ -51,22 +43,42 @@ function Navbar() {
           <span></span>
         </button>
 
-        <ul
-          id="primary-navigation"
-          className={menuOpen ? "nav-links nav-links-open" : "nav-links"}
-        >
-          <li><NavLink to="/" end>Home</NavLink></li>
-          <li><NavLink to="/menu">Menu</NavLink></li>
-          <li><NavLink to="/about">About</NavLink></li>
-          <li><NavLink to="/reservation">Reserve Table</NavLink></li>
+        {/* Navigation Links */}
+        <ul className={menuOpen ? "nav-links nav-links-open" : "nav-links"}>
+          <li>
+            <NavLink to="/" end className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/menu" className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}>
+               Menu
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/story" className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}>
+              Story
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/reservation" className="btn-reserve-link">
+              <button type="button" className="btn-reserve">
+                Reserve Table
+              </button>
+            </NavLink>
+          </li>
           {token ? (
             <li>
-              <button onClick={handleLogout} className="logout-btn">
+              <button type="button" onClick={handleLogout} className="logout-btn">
                 Logout
               </button>
             </li>
           ) : (
-            <li><NavLink to="/login">Login</NavLink></li>
+            <li>
+              <NavLink to="/login" className="nav-login-btn">
+                Login
+              </NavLink>
+            </li>
           )}
         </ul>
       </div>
