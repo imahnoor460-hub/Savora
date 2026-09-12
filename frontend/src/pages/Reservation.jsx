@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Reservation.css";
 import reserveImage from "../assets/reservation.jpg";
+import { API_BASE } from "../api";
 
 export default function Reservation() {
   const [name, setName] = useState("");
@@ -15,7 +16,7 @@ export default function Reservation() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/reservation/", {
+      const response = await fetch(`${API_BASE}/reservation/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

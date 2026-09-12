@@ -1,5 +1,10 @@
 
-export const API_BASE = "http://127.0.0.1:8000";
+// Base URL of the Django API — NOT the site's own URL.
+// Set VITE_API_BASE_URL in the deployment environment (Vercel) to point the
+// built frontend at the hosted backend; falls back to the local dev server.
+export const API_BASE = (
+  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000"
+).replace(/\/$/, "");
 
 export const getAccessToken = () => localStorage.getItem("token");
 export const getRefreshToken = () => localStorage.getItem("refresh");

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import DishDetailModal from "../components/DishDetailModal";
+import { API_BASE } from "../api";
 
 import heroImage from "../assets/res.jpg";
 import storyImage from "../assets/story.jpg";
@@ -22,7 +23,7 @@ function Home() {
   const showcaseCardRef = useRef(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/home/")
+    fetch(`${API_BASE}/home/`)
       .then((response) => response.json())
       .then((data) => {
         const fetchedItems = data.MenuItem || [];

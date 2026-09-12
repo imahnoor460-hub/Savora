@@ -37,3 +37,6 @@ db.sqlite3.bak-*
 
 # Uploaded media (menu item photos)
 media/
+
+# collectstatic output (regenerated during the Render build)
+staticfiles/

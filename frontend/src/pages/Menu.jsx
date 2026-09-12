@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Menu.css";
 import defaultDishImg from "../assets/food.jpg";
 import DishDetailModal from "../components/DishDetailModal";
+import { API_BASE } from "../api";
 
 export default function Menu() {
   const [menu, setMenu] = useState([]);
@@ -16,8 +17,8 @@ export default function Menu() {
   // Load menu + categories once, on mount only.
   useEffect(() => {
     Promise.all([
-      fetch("http://127.0.0.1:8000/menu/").then((res) => res.json()),
-      fetch("http://127.0.0.1:8000/category/").then((res) => res.json()).catch(() => [])
+      fetch(`${API_BASE}/menu/`).then((res) => res.json()),
+      fetch(`${API_BASE}/category/`).then((res) => res.json()).catch(() => [])
     ])
       .then(([menuData, catData]) => {
         // Handle DRF pagination (.results) or direct arrays for menu
