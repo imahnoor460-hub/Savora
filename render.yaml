@@ -29,11 +29,17 @@ services:
     # pre-deploy commands are not available on Render's free instance types.
     # loaddata is idempotent: the fixture carries explicit primary keys, so it
     # updates the existing rows instead of duplicating them.
+    #
+    # dedupe_categories cleans up after the one case where that is not enough:
+    # migration 0004 seeds the six categories on an empty database under its own
+    # primary keys, which do not match the ones in the fixture, leaving each
+    # category present twice.
     buildCommand: >-
       pip install -r requirements.txt &&
       python manage.py collectstatic --noinput &&
       python manage.py migrate &&
       python manage.py loaddata initial_data &&
+      python manage.py dedupe_categories &&
       python manage.py ensure_superuser
 
     startCommand: gunicorn backend.wsgi:application
