@@ -162,8 +162,10 @@ STORAGES = {
 CORS_ALLOWED_ORIGINS = [
     # Local Vite dev server
     "http://localhost:5174",
-    # Deployed frontend on Vercel
-    "https://mahnoor-savora.vercel.app",
+    # Deployed frontend on Vercel. Origins are scheme + host only: a trailing
+    # slash makes Django's system checks fail with corsheaders.E014, which
+    # aborts collectstatic during the Render build.
+    "https://mahnoor-savora-one.vercel.app",
 ]
 
 # Extra origins (e.g. Vercel preview deployments) without touching this file:
@@ -173,6 +175,13 @@ CORS_ALLOWED_ORIGINS += [
     for origin in os.environ.get("CORS_EXTRA_ORIGINS", "").split(",")
     if origin.strip()
 ]
+
+
+# Django requires the frontend origin here for any cookie/session-authenticated
+# POST/PUT/DELETE over HTTPS (e.g. the Django admin). The REST API itself uses
+# bearer JWTs and is not CSRF-protected, so this is a safety net rather than a
+# requirement for the current endpoints.
+CSRF_TRUSTED_ORIGINS = list(CORS_ALLOWED_ORIGINS)
 
 
 # Django REST Framework
