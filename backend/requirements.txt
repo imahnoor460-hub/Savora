@@ -37,3 +37,9 @@ whitenoise==6.12.0
 # Postgres injects, and psycopg is the driver Django talks to it with.
 dj-database-url==3.0.1
 psycopg[binary]==3.2.10
+
+# Media hosting for MenuItem.image. Render's disk is ephemeral and Django does
+# not serve MEDIA_URL when DEBUG is False, so uploads go to Cloudinary's CDN
+# instead. Activated by the CLOUDINARY_URL environment variable.
+cloudinary==1.44.1
+django-cloudinary-storage==0.3.0

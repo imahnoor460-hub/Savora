@@ -50,6 +50,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
+    # Media storage backend. Only takes effect when CLOUDINARY_URL is set (see
+    # STORAGES below); harmless otherwise.
+    "cloudinary_storage",
+    "cloudinary",
     "snippets",
 ]
 
@@ -158,7 +162,9 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STORAGES = {
-    # Uploaded media stays on the local filesystem, exactly as before.
+    # Uploaded media. Locally this stays on the filesystem; in production the
+    # block below swaps in Cloudinary, because Render's disk is ephemeral and
+    # /media/ is not served at all when DEBUG is False.
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
@@ -172,6 +178,18 @@ STORAGES = {
         ),
     },
 }
+
+
+# Media files (menu item photos)
+#
+# Render's filesystem is ephemeral, so uploads vanish on the next deploy, and
+# backend/urls.py only serves MEDIA_URL while DEBUG is True. When CLOUDINARY_URL
+# is present the files are stored on Cloudinary instead and served from its CDN.
+# The cloudinary library reads CLOUDINARY_URL from the environment itself.
+if os.environ.get("CLOUDINARY_URL", "").strip():
+    STORAGES["default"] = {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    }
 
 
 # CORS
