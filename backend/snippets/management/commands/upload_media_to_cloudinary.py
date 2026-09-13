@@ -43,6 +43,14 @@ class Command(BaseCommand):
 
         import cloudinary.uploader
 
+        # Mirrors MediaCloudinaryStorage._prepend_prefix: MEDIA_URL without its
+        # leading slash, guaranteed to end in one.
+        prefix = settings.MEDIA_URL.lstrip("/")
+        if prefix and not prefix.endswith("/"):
+            prefix += "/"
+
+        self.stdout.write(f"Uploading under prefix {prefix!r}")
+
         uploaded = skipped = failed = 0
 
         for dirpath, _dirnames, filenames in os.walk(media_root):
@@ -50,9 +58,11 @@ class Command(BaseCommand):
                 full_path = os.path.join(dirpath, filename)
                 relative = os.path.relpath(full_path, media_root).replace(os.sep, "/")
 
-                # Cloudinary appends its own format extension, so the public_id
-                # must not carry one or the stored path stops matching.
-                public_id = os.path.splitext(relative)[0]
+                # MediaCloudinaryStorage resolves a stored name by prepending
+                # MEDIA_URL to it, so the public_id has to carry that same
+                # prefix or the URL the API hands out will 404. Cloudinary adds
+                # the format extension itself, so it must not carry one.
+                public_id = prefix + os.path.splitext(relative)[0]
 
                 if options["dry_run"]:
                     self.stdout.write(f"would upload {relative} -> {public_id}")
