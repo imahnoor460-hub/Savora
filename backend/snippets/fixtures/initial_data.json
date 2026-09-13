@@ -1,0 +1,492 @@
+[
+{
+  "model": "snippets.category",
+  "pk": 8,
+  "fields": {
+    "name": "Starters & Appetizers"
+  }
+},
+{
+  "model": "snippets.category",
+  "pk": 9,
+  "fields": {
+    "name": "Chef's Signature Mains"
+  }
+},
+{
+  "model": "snippets.category",
+  "pk": 10,
+  "fields": {
+    "name": "Steaks & Wagyu"
+  }
+},
+{
+  "model": "snippets.category",
+  "pk": 11,
+  "fields": {
+    "name": "Artisanal Pasta"
+  }
+},
+{
+  "model": "snippets.category",
+  "pk": 12,
+  "fields": {
+    "name": "Desserts"
+  }
+},
+{
+  "model": "snippets.category",
+  "pk": 13,
+  "fields": {
+    "name": "Luxury Cocktails / Beverages"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 2,
+  "fields": {
+    "category": 8,
+    "name": "Smoked Burrata Salad",
+    "description": "Ember-smoked cream burrata, heritage tomato, cold-pressed basil oil.",
+    "price": "15.00",
+    "composition": "Burrata di Andria\r\nHeritage tomato\r\nApplewood smoke\r\nGenovese basil\r\nAged balsamic",
+    "energy": "310 kcal",
+    "allergens": "Dairy",
+    "pairing": "Blanc de Blancs",
+    "is_chef_recommendation": true,
+    "image": "menu_items/smoked_salad.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 3,
+  "fields": {
+    "category": 8,
+    "name": "Oysters & Champagne Mignonette",
+    "description": "Half dozen, chilled on obsidian stone with pink peppercorn mignonette.",
+    "price": "20.00",
+    "composition": "Lindisfarne oyster\r\nChampagne vinegar\r\nÉchalote\r\nPink peppercorn\r\nSea vegetable",
+    "energy": "180 kcal",
+    "allergens": "Molluscs, Sulphites",
+    "pairing": "Blanc de Blancs",
+    "is_chef_recommendation": false,
+    "image": "menu_items/Oysters_-champagne-mignonette.png"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 4,
+  "fields": {
+    "category": 8,
+    "name": "Hokkaido Scallop Crudo",
+    "description": "Raw scallop, yuzu kosho, oscietra caviar and finger lime pearls.",
+    "price": "24.00",
+    "composition": "Hokkaido scallop\r\nYuzu kosho\r\nOscietra caviar\r\nFinger lime\r\nNasturtium",
+    "energy": "240 kcal",
+    "allergens": "Molluscs, Fish",
+    "pairing": "Blanc de Blancs",
+    "is_chef_recommendation": false,
+    "image": "menu_items/photo-1534422298391-e4f8c172dddb.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 5,
+  "fields": {
+    "category": 8,
+    "name": "Foie Gras Torchon",
+    "description": "Silken torchon with poached quince and toasted brioche soldiers.",
+    "price": "27.00",
+    "composition": "Landes foie gras\r\nQuince\r\nBrioche\r\nPedro Ximénez\r\nMaldon salt",
+    "energy": "510 kcal",
+    "allergens": "Gluten, Dairy",
+    "pairing": "Blanc de Blancs",
+    "is_chef_recommendation": false,
+    "image": "menu_items/foie_gras.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 6,
+  "fields": {
+    "category": 8,
+    "name": "Black Truffle Velouté",
+    "description": "Chestnut cream poured at the table over Périgord truffle shavings.",
+    "price": "40.00",
+    "composition": "Périgord truffle\r\nChestnut\r\nCultured cream\r\nThyme\r\nBrown butter",
+    "energy": "290 kcal",
+    "allergens": "Dairy, Celery",
+    "pairing": "Blanc de Blancs",
+    "is_chef_recommendation": false,
+    "image": "menu_items/Black_Truffle.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 7,
+  "fields": {
+    "category": 9,
+    "name": "Butter-Poached Lobster",
+    "description": "Native lobster poached in saffron butter, fennel pollen, bisque reduction.",
+    "price": "45.00",
+    "composition": "Native lobster\r\nLa Mancha saffron\r\nFennel pollen\r\nBrown butter\r\nBisque",
+    "energy": "640 kcal",
+    "allergens": "Crustaceans, Dairy",
+    "pairing": "Barolo 2009",
+    "is_chef_recommendation": true,
+    "image": "menu_items/butter.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 8,
+  "fields": {
+    "category": 9,
+    "name": "Seared Salmon, Lemon Butter",
+    "description": "Loch Duart fillet, Amalfi lemon beurre blanc, samphire and dill oil.",
+    "price": "40.00",
+    "composition": "Loch Duart salmon\r\nAmalfi lemon\r\nBeurre blanc\r\nSamphire\r\nDill oil",
+    "energy": "580 kcal",
+    "allergens": "Fish, Dairy",
+    "pairing": "Barolo 2009",
+    "is_chef_recommendation": false,
+    "image": "menu_items/Seared_Salmon.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 9,
+  "fields": {
+    "category": 9,
+    "name": "Duck à l'Orange Sanguine",
+    "description": "Gressingham breast, blood orange gastrique, salt-baked beetroot.",
+    "price": "43.00",
+    "composition": "Gressingham duck\r\nBlood orange\r\nStar anise\r\nSalt-baked beet\r\nDuck jus",
+    "energy": "720 kcal",
+    "allergens": "Sulphites",
+    "pairing": "Barolo 2009",
+    "is_chef_recommendation": true,
+    "image": "menu_items/duck.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 10,
+  "fields": {
+    "category": 9,
+    "name": "Black Cod Saikyo Miso",
+    "description": "Three-day miso marinade, grilled over binchotan, pickled ginger flower.",
+    "price": "39.00",
+    "composition": "Black cod\r\nSaikyo miso\r\nMirin\r\nGinger flower\r\nShiso",
+    "energy": "450 kcal",
+    "allergens": "Fish, Soy",
+    "pairing": "Barolo 2009",
+    "is_chef_recommendation": false,
+    "image": "menu_items/images_2.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 11,
+  "fields": {
+    "category": 9,
+    "name": "Aged Venison, Juniper",
+    "description": "28-day venison loin with cocoa nib crust, damson and celeriac ash.",
+    "price": "44.00",
+    "composition": "28-day venison\r\nJuniper\r\nCocoa nib\r\nDamson\r\nCeleriac ash",
+    "energy": "630 kcal",
+    "allergens": "None",
+    "pairing": "Barolo 2009",
+    "is_chef_recommendation": false,
+    "image": "menu_items/photo-1432139555190-58524dae6a55.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 12,
+  "fields": {
+    "category": 10,
+    "name": "A5 Wagyu & Gold Leaf Steak",
+    "description": "Miyazaki A5 sirloin, bone marrow jus, 23kt gold leaf, charred leek.",
+    "price": "52.00",
+    "composition": "A5 Miyazaki sirloin\r\nBone marrow\r\n23kt gold leaf\r\nCharred leek\r\nBlack garlic",
+    "energy": "890 kcal",
+    "allergens": "None",
+    "pairing": "Château Margaux",
+    "is_chef_recommendation": true,
+    "image": "menu_items/images_3.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 13,
+  "fields": {
+    "category": 10,
+    "name": "Dry-Aged Ribeye, 45 Days",
+    "description": "Himalayan-salt aged ribeye over oak embers, smoked bone butter.",
+    "price": "26.00",
+    "composition": "45-day ribeye\r\nOak embers\r\nSmoked bone butter\r\nPeppercorn\r\nSea salt",
+    "energy": "1120 kcal",
+    "allergens": "Dairy",
+    "pairing": "Château Margaux",
+    "is_chef_recommendation": false,
+    "image": "menu_items/images_4.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 14,
+  "fields": {
+    "category": 10,
+    "name": "Chateaubriand for Two",
+    "description": "Centre-cut tenderloin carved tableside with béarnaise and pommes soufflées.",
+    "price": "48.00",
+    "composition": "Centre-cut tenderloin\r\nBéarnaise\r\nPommes soufflées\r\nTarragon\r\nShallot",
+    "energy": "1420 kcal",
+    "allergens": "Dairy, Egg",
+    "pairing": "Château Margaux",
+    "is_chef_recommendation": true,
+    "image": "menu_items/images_5.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 15,
+  "fields": {
+    "category": 10,
+    "name": "Tenderloin au Poivre",
+    "description": "Green peppercorn crust, cognac cream, confit garlic purée.",
+    "price": "31.00",
+    "composition": "Beef tenderloin\r\nGreen peppercorn\r\nCognac\r\nCream\r\nConfit garlic",
+    "energy": "840 kcal",
+    "allergens": "Dairy, Sulphites",
+    "pairing": "Château Margaux",
+    "is_chef_recommendation": false,
+    "image": "menu_items/images_6.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 16,
+  "fields": {
+    "category": 11,
+    "name": "Truffle Infused Tagliatelle",
+    "description": "Hand-rolled egg pasta folded with Périgord black truffle and 36-month Parmigiano.",
+    "price": "28.00",
+    "composition": "Egg tagliatelle\r\nPérigord truffle\r\nParmigiano 36mo\r\nCultured butter\r\nChive",
+    "energy": "690 kcal",
+    "allergens": "Gluten, Egg, Dairy",
+    "pairing": "Chianti Classico",
+    "is_chef_recommendation": false,
+    "image": "menu_items/images_7.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 17,
+  "fields": {
+    "category": 11,
+    "name": "Lobster Ravioli",
+    "description": "Parcels of native lobster in shellfish bisque with tarragon oil.",
+    "price": "46.00",
+    "composition": "Lobster\r\nSaffron pasta\r\nShellfish bisque\r\nTarragon\r\nCrème fraîche",
+    "energy": "640 kcal",
+    "allergens": "Gluten, Egg, Crustaceans",
+    "pairing": "Chianti Classico",
+    "is_chef_recommendation": true,
+    "image": "menu_items/images_8.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 18,
+  "fields": {
+    "category": 11,
+    "name": "Cacio e Pepe Tonnarelli",
+    "description": "Pecorino Romano DOP emulsion, cracked Sarawak pepper, nothing else.",
+    "price": "33.00",
+    "composition": "Tonnarelli\r\nPecorino Romano DOP\r\nSarawak pepper\r\nPasta water\r\nOlive oil",
+    "energy": "580 kcal",
+    "allergens": "Gluten, Egg, Dairy",
+    "pairing": "Chianti Classico",
+    "is_chef_recommendation": false,
+    "image": "menu_items/images_9.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 19,
+  "fields": {
+    "category": 11,
+    "name": "Wild Mushroom Agnolotti",
+    "description": "Cèpe and girolle filling, brown butter, aged sherry and hazelnut.",
+    "price": "42.00",
+    "composition": "Cèpe\r\nGirolle\r\nBrown butter\r\nAged sherry\r\nHazelnut",
+    "energy": "620 kcal",
+    "allergens": "Gluten, Egg, Dairy, Nuts",
+    "pairing": "Chianti Classico",
+    "is_chef_recommendation": true,
+    "image": "menu_items/images_10.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 22,
+  "fields": {
+    "category": 11,
+    "name": "Squid Ink Linguine",
+    "description": "Nero di seppia, blue swimmer crab, Calabrian chilli and bottarga.",
+    "price": "35.00",
+    "composition": "Squid ink linguine\r\nBlue swimmer crab\r\nCalabrian chilli\r\nBottarga\r\nLemon",
+    "energy": "640 kcal",
+    "allergens": "Gluten, Crustaceans, Fish",
+    "pairing": "Chianti Classico",
+    "is_chef_recommendation": false,
+    "image": "menu_items/images_11.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 23,
+  "fields": {
+    "category": 12,
+    "name": "Gold Leaf Soufflé",
+    "description": "Grand Marnier soufflé opened tableside, vanilla anglaise, 23kt leaf.",
+    "price": "18.00",
+    "composition": "Grand Marnier\r\nVanilla anglaise\r\n23kt gold leaf\r\nOrange zest\r\nCane sugar",
+    "energy": "310 kcal",
+    "allergens": "Dairy, Egg, Gluten",
+    "pairing": "Tokaji 5 Puttonyos",
+    "is_chef_recommendation": true,
+    "image": "menu_items/images_15.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 24,
+  "fields": {
+    "category": 12,
+    "name": "Sphère Noire",
+    "description": "Valrhona 72% sphere melted with smoked salt caramel.",
+    "price": "17.00",
+    "composition": "Valrhona 72%\r\nSmoked salt\r\nCaramel\r\nCacao tuile\r\nCrème fraîche",
+    "energy": "510 kcal",
+    "allergens": "Dairy, Soy",
+    "pairing": "Tokaji 5 Puttonyos",
+    "is_chef_recommendation": false,
+    "image": "menu_items/images_13.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 25,
+  "fields": {
+    "category": 12,
+    "name": "Tahitian Mille-Feuille",
+    "description": "Caramelised puff pastry, Tahitian vanilla crème, praline dust.",
+    "price": "11.00",
+    "composition": "Tahitian vanilla\r\nPuff pastry\r\nCrème pâtissière\r\nDemerara\r\nPraline",
+    "energy": "310 kcal",
+    "allergens": "Gluten, Dairy, Egg, Nuts",
+    "pairing": "Tokaji 5 Puttonyos",
+    "is_chef_recommendation": false,
+    "image": "menu_items/images_17.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 26,
+  "fields": {
+    "category": 12,
+    "name": "Comté & Honeycomb",
+    "description": "36-month Comté, wildflower honeycomb, walnut and fig bread.",
+    "price": "13.00",
+    "composition": "Comté 36mo\r\nWildflower honey\r\nWalnut\r\nFig bread\r\nSea salt",
+    "energy": "410 kcal",
+    "allergens": "Dairy, Gluten, Nuts",
+    "pairing": "Tokaji 5 Puttonyos",
+    "is_chef_recommendation": false,
+    "image": "menu_items/images_18.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 27,
+  "fields": {
+    "category": 13,
+    "name": "Obsidian Negroni",
+    "description": "Charcoal-washed gin, Campari, Carpano Antica, burnt orange oils",
+    "price": "16.00",
+    "composition": "Charcoal-washed gin\r\nCampari\r\nCarpano Antica\r\nBurnt orange\r\nClear ice",
+    "energy": "210 kcal",
+    "allergens": "Sulphites",
+    "pairing": "Neat or over clear ice",
+    "is_chef_recommendation": false,
+    "image": "menu_items/images_20.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 28,
+  "fields": {
+    "category": 13,
+    "name": "Saffron Gold Fizz",
+    "description": "Saffron-infused vodka, yuzu, egg white, edible gold dust.",
+    "price": "20.00",
+    "composition": "Saffron vodka\r\nYuzu\r\nEgg white\r\nGold dust\r\nSoda",
+    "energy": "310 kcal",
+    "allergens": "Egg",
+    "pairing": "Neat or over clear ice",
+    "is_chef_recommendation": true,
+    "image": "menu_items/images_21.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 29,
+  "fields": {
+    "category": 13,
+    "name": "Smoked Oak Old Fashioned",
+    "description": "Japanese whisky smoked under oak, demerara, aromatic bitters.",
+    "price": "21.00",
+    "composition": "Japanese whisky\r\nOak smoke\r\nDemerara\r\nAromatic bitters\r\nOrange peel",
+    "energy": "230 kcal",
+    "allergens": "None",
+    "pairing": "Neat or over clear ice",
+    "is_chef_recommendation": true,
+    "image": "menu_items/download_13.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 30,
+  "fields": {
+    "category": 13,
+    "name": "Vintage Champagne, by the glass",
+    "description": "Grower cuvée, disgorged 2019 — brioche, chalk and white cherry.",
+    "price": "22.00",
+    "composition": "Grower cuvée\r\nChardonnay\r\nPinot Noir\r\n2019 disgorgement",
+    "energy": "90 kcal",
+    "allergens": "Sulphites",
+    "pairing": "Neat or over clear ice",
+    "is_chef_recommendation": false,
+    "image": "menu_items/images_22.jpg"
+  }
+},
+{
+  "model": "snippets.menuitem",
+  "pk": 31,
+  "fields": {
+    "category": 13,
+    "name": "Tokaji 5 Puttonyos, by the glass",
+    "description": "Botrytised Furmint — apricot, orange peel and acacia honey.",
+    "price": "17.00",
+    "composition": "Furmint\r\nBotrytis\r\nApricot\r\nAcacia honey",
+    "energy": "160 kcal",
+    "allergens": "None",
+    "pairing": "Neat or over clear ice",
+    "is_chef_recommendation": false,
+    "image": "menu_items/images_23.jpg"
+  }
+}
+]

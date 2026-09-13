@@ -31,3 +31,9 @@ gunicorn==26.2.0
 # Serves static files (Django admin CSS/JS) in production, where Django itself
 # will not. Wired into MIDDLEWARE and STORAGES in settings.py.
 whitenoise==6.12.0
+
+# Production database. Render's filesystem is ephemeral, so SQLite cannot be
+# used there; dj-database-url parses the DATABASE_URL that Render's managed
+# Postgres injects, and psycopg is the driver Django talks to it with.
+dj-database-url==3.0.1
+psycopg[binary]==3.2.10

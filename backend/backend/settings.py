@@ -95,6 +95,11 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 
 # Database
+#
+# Render's filesystem is ephemeral: a SQLite file there is wiped on every deploy
+# and restart, so production must use a managed database. Render's Postgres
+# instance supplies DATABASE_URL; without it (local development) we fall back to
+# the SQLite file exactly as before.
 
 DATABASES = {
     "default": {
@@ -102,6 +107,18 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+_database_url = os.environ.get("DATABASE_URL", "").strip()
+if _database_url:
+    import dj_database_url
+
+    DATABASES["default"] = dj_database_url.parse(
+        _database_url,
+        # Reuse connections between requests instead of reconnecting each time.
+        conn_max_age=600,
+        # Render's managed Postgres requires TLS.
+        ssl_require=True,
+    )
 
 
 # Password validation
