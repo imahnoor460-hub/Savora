@@ -7,6 +7,11 @@
 # Transitive dependencies (asgiref, sqlparse, PyJWT, tzdata) are resolved by
 # pip and intentionally not pinned here.
 
+# Reads a local .env file into the environment during development. Render sets
+# real environment variables instead, and backend/settings.py treats the import
+# as optional, so this is here for local setups rather than for the deploy.
+python-dotenv==1.2.2
+
 # Core framework
 Django==6.0.7
 

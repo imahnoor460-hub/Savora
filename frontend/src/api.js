@@ -1,9 +1,21 @@
 
 // Base URL of the Django API — NOT the site's own URL.
-// Set VITE_API_BASE_URL in the deployment environment (Vercel) to point the
-// built frontend at the hosted backend; falls back to the local dev server.
+//
+// VITE_API_BASE_URL (set in Vercel, or in a local .env file) wins. Vite inlines
+// it at build time, so it has to be present when `vite build` runs, not at
+// runtime.
+//
+// Without it, a production build targets the deployed Render backend and only a
+// development build falls back to the local Django server. Pointing the
+// deployed site at 127.0.0.1 — which is the visitor's own machine, not the
+// server — is what left the menu empty, so a missing variable must never
+// resolve to localhost in a build that ships.
+const DEPLOYED_API_BASE_URL = "https://savora-api-x64l.onrender.com";
+const LOCAL_API_BASE_URL = "http://127.0.0.1:8000";
+
 export const API_BASE = (
-  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000"
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.PROD ? DEPLOYED_API_BASE_URL : LOCAL_API_BASE_URL)
 ).replace(/\/$/, "");
 
 export const getAccessToken = () => localStorage.getItem("token");

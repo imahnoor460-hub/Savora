@@ -10,6 +10,18 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Local development convenience: read backend/.env, or the repository-root .env
+# one level up, into the environment. python-dotenv is not installed on Render
+# (nothing there needs it — the platform supplies real environment variables),
+# so a missing package must not stop the server from booting.
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    pass
+else:
+    for _env_file in (BASE_DIR / ".env", BASE_DIR.parent / ".env"):
+        if _env_file.is_file():
+            load_dotenv(_env_file)
 
 # Security / environment
 #
@@ -197,10 +209,24 @@ if os.environ.get("CLOUDINARY_URL", "").strip():
 CORS_ALLOWED_ORIGINS = [
     # Local Vite dev server
     "http://localhost:5174",
+    "http://127.0.0.1:5174",
     # Deployed frontend on Vercel. Origins are scheme + host only: a trailing
     # slash makes Django's system checks fail with corsheaders.E014, which
     # aborts collectstatic during the Render build.
+    #
+    # The host has to match exactly. Only "mahnoor-savora-one" was listed here,
+    # so the browser blocked every request from the live site at
+    # "mahnoor-savora" and the menu came back empty.
+    "https://mahnoor-savora.vercel.app",
     "https://mahnoor-savora-one.vercel.app",
+]
+
+# Vercel gives every preview deployment its own hostname
+# (savora-<hash>-<scope>.vercel.app), which cannot be listed ahead of time.
+# Scoped to this project's names rather than all of vercel.app.
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://mahnoor-savora[a-z0-9-]*\.vercel\.app$",
+    r"^https://savora[a-z0-9-]*\.vercel\.app$",
 ]
 
 # Extra origins (e.g. Vercel preview deployments) without touching this file:
