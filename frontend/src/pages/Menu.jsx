@@ -5,6 +5,12 @@ import defaultDishImg from "../assets/food.jpg";
 import DishDetailModal from "../components/DishDetailModal";
 import { API_BASE } from "../api";
 
+// The global <Navbar /> in App.jsx is position: fixed, so it sits outside the
+// document flow and covers whatever starts at y=0. 70px is its height (18px
+// padding + 34px brand icon + 18px padding) and is the same number Navbar.css
+// already uses to place the mobile drawer.
+const NAVBAR_HEIGHT = 70;
+
 export default function Menu() {
   const [menu, setMenu] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -98,26 +104,14 @@ export default function Menu() {
   };
 
   return (
-    <div style={{ background: "#0C0C0D", color: "#E2E8F0", fontFamily: "'Jost',system-ui,sans-serif", minHeight: "100vh", position: "relative", overflowX: "hidden" }}>
+    <div style={{ background: "#0C0C0D", color: "#E2E8F0", fontFamily: "'Jost',system-ui,sans-serif", minHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)`, paddingTop: NAVBAR_HEIGHT, position: "relative", overflowX: "hidden" }}>
       <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 1, opacity: ".5", backgroundImage: "radial-gradient(rgba(255,255,255,.055) 1px, transparent 1px)", backgroundSize: "3px 3px", mixBlendMode: "overlay" }}></div>
       
-      {/* Header with dynamic category tabs */}
-      <header style={{ position: "sticky", top: 0, zIndex: 60, background: "rgba(13,13,15,.72)", backdropFilter: "blur(24px) saturate(140%)", WebkitBackdropFilter: "blur(24px) saturate(140%)", borderBottom: "1px solid rgba(212,175,55,.18)" }}>    
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "24px", maxWidth: "1440px", margin: "0 auto", padding: "16px clamp(18px,4vw,56px)" }}>      
-          <a href="#" style={{ display: "flex", alignItems: "center", gap: "13px" }}>        
-            <span style={{ width: "32px", height: "32px", display: "grid", placeItems: "center", border: "1px solid rgba(212,175,55,.5)", borderRadius: "50%", fontFamily: "'Cinzel',serif", fontSize: "13px", background: "linear-gradient(140deg,rgba(243,227,178,.18),rgba(140,106,47,.1))", color: "#F3E3B2" }}>S</span>        
-            <span style={{ fontFamily: "'Cinzel',serif", fontSize: "21px", letterSpacing: ".34em", fontWeight: 600, whiteSpace: "nowrap", backgroundImage: "linear-gradient(100deg,#F6E9C2 0%,#D4AF37 38%,#FFF6DA 52%,#B8862B 70%,#8C6A2F 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>SAVORA</span>      
-          </a>      
-          <div style={{ display: "flex", alignItems: "center", gap: "clamp(16px,2.6vw,38px)" }}>        
-            <a href="#" style={{ fontSize: "12px", letterSpacing: ".24em", textTransform: "uppercase", color: "#E2E8F0", whiteSpace: "nowrap" }}>Home</a>        
-            <a href="#menu" style={{ fontSize: "12px", letterSpacing: ".24em", textTransform: "uppercase", color: "#D4AF37", whiteSpace: "nowrap" }}>Menu</a>        
-            <a href="#story" style={{ fontSize: "12px", letterSpacing: ".24em", textTransform: "uppercase", color: "#E2E8F0", whiteSpace: "nowrap" }}>Story</a>        
-            <button type="button" onClick={() => navigate("/reservation")} style={{ border: "1px solid rgba(212,175,55,.55)", background: "linear-gradient(120deg,rgba(212,175,55,.16),rgba(212,175,55,.04))", color: "#F3E3B2", fontFamily: "'Jost',sans-serif", fontSize: "11.5px", letterSpacing: ".22em", textTransform: "uppercase", whiteSpace: "nowrap", padding: "12px 24px", borderRadius: "2px", cursor: "pointer" }}>Reserve Table</button>      
-          </div>    
-        </div>    
-        
+      {/* Category tabs. The site header itself is the global <Navbar />; this
+          bar only switches categories, and sticks directly beneath it. */}
+      <header style={{ position: "sticky", top: NAVBAR_HEIGHT, zIndex: 60, background: "rgba(13,13,15,.72)", backdropFilter: "blur(24px) saturate(140%)", WebkitBackdropFilter: "blur(24px) saturate(140%)", borderBottom: "1px solid rgba(212,175,55,.18)" }}>
         {/* Dynamic Category Tabs rendered here */}
-        <div style={{ borderTop: "1px solid rgba(255,255,255,.06)" }}>      
+        <div>      
           <div style={{ display: "flex", gap: "8px", overflowX: "auto", maxWidth: "1440px", margin: "0 auto", padding: "12px clamp(18px,4vw,56px)" }}>        
             {categories.length > 0 ? (
               categories.map((cat) => (
