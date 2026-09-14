@@ -53,9 +53,13 @@ export default function DishDetailModal({ item, open, onClose, fallbackImage }) 
   const price = Number(item.price);
   const priceLabel = Number.isFinite(price) ? `$${price.toFixed(2)}` : "$--";
 
-  // Composition is stored as one comma separated string in the admin.
+  // Composition arrives as one string holding several ingredients. The admin
+  // textarea takes them one per line, which is what every dish currently uses,
+  // and the field's help text asks for commas — so accept either, plus the
+  // semicolons people reach for anyway. Splitting on commas alone left the
+  // whole string in a single chip, which is why it rendered as one long line.
   const composition = String(item.composition || "")
-    .split(",")
+    .split(/[\r\n,;]+/)
     .map((part) => part.trim())
     .filter(Boolean);
 
@@ -127,8 +131,8 @@ export default function DishDetailModal({ item, open, onClose, fallbackImage }) 
             <>
               <div className="modal-section-title">Composition</div>
               <div className="modal-ingredients">
-                {composition.map((ing) => (
-                  <span key={ing} className="ingredient-chip">
+                {composition.map((ing, index) => (
+                  <span key={`${ing}-${index}`} className="ingredient-chip">
                     {ing}
                   </span>
                 ))}
