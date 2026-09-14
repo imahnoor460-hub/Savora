@@ -15,8 +15,15 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
 
+# Everything MenuItem.image accepts (see its FileExtensionValidator), which is
+# also what Cloudinary will take as resource_type="image". MEDIA_ROOT can hold
+# other things — a menu_items.zip archive sat next to the photos — and uploading
+# one of those would both fail and claim a public_id the photo folder needs.
+IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
+
+
 class Command(BaseCommand):
-    help = "Upload every file under MEDIA_ROOT to Cloudinary, preserving paths."
+    help = "Upload every image under MEDIA_ROOT to Cloudinary, preserving paths."
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -55,6 +62,12 @@ class Command(BaseCommand):
 
         for dirpath, _dirnames, filenames in os.walk(media_root):
             for filename in sorted(filenames):
+                stem, suffix = os.path.splitext(filename)
+                if suffix.lower() not in IMAGE_SUFFIXES:
+                    skipped += 1
+                    self.stdout.write(f"skipped {filename} (not an image)")
+                    continue
+
                 full_path = os.path.join(dirpath, filename)
                 relative = os.path.relpath(full_path, media_root).replace(os.sep, "/")
 
