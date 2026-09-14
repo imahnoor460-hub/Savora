@@ -22,3 +22,21 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+env/
+
+# Environment
+.env
+
+# Database
+db.sqlite3
+db.sqlite3.bak-*
+
+# Uploaded media (menu item photos)
+media/
+
+# collectstatic output (regenerated during the Render build)
+staticfiles/

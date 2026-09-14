@@ -1,0 +1,50 @@
+# Savora — Django backend dependencies
+#
+# Only what this Django project actually needs. The shared virtualenv also
+# contains the Google AI / MCP libraries used by agents/ and mcp-server/,
+# which are not part of the backend and are deliberately excluded.
+#
+# Transitive dependencies (asgiref, sqlparse, PyJWT, tzdata) are resolved by
+# pip and intentionally not pinned here.
+
+# Reads a local .env file into the environment during development. Render sets
+# real environment variables instead, and backend/settings.py treats the import
+# as optional, so this is here for local setups rather than for the deploy.
+python-dotenv==1.2.2
+
+# Core framework
+Django==6.0.7
+
+# REST API layer — "rest_framework" in INSTALLED_APPS; used by
+# snippets/views.py and snippets/Serializer.py
+djangorestframework==3.17.1
+
+# JWT auth for the admin endpoints — DEFAULT_AUTHENTICATION_CLASSES in
+# settings.py, TokenObtainPairView / TokenRefreshView in backend/urls.py
+djangorestframework-simplejwt==5.5.1
+
+# Cross-origin requests from the React frontend — "corsheaders" in
+# INSTALLED_APPS and MIDDLEWARE
+django-cors-headers==4.9.0
+
+# Required by MenuItem.image (models.ImageField) to validate and handle uploads
+pillow==12.3.0
+
+# WSGI server that runs the app on Render
+gunicorn==26.2.0
+
+# Serves static files (Django admin CSS/JS) in production, where Django itself
+# will not. Wired into MIDDLEWARE and STORAGES in settings.py.
+whitenoise==6.12.0
+
+# Production database. Render's filesystem is ephemeral, so SQLite cannot be
+# used there; dj-database-url parses the DATABASE_URL that Render's managed
+# Postgres injects, and psycopg is the driver Django talks to it with.
+dj-database-url==3.0.1
+psycopg[binary]==3.2.10
+
+# Media hosting for MenuItem.image. Render's disk is ephemeral and Django does
+# not serve MEDIA_URL when DEBUG is False, so uploads go to Cloudinary's CDN
+# instead. Activated by the CLOUDINARY_URL environment variable.
+cloudinary==1.44.1
+django-cloudinary-storage==0.3.0

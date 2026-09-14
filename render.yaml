@@ -1,0 +1,80 @@
+# Render Blueprint for the Savora backend.
+#
+# Everything the service needs lives here rather than in the dashboard, so a
+# build command cannot silently fail to save and a redeploy cannot pick up a
+# stale configuration.
+#
+# The React frontend is deployed separately on Vercel and is not described here.
+
+databases:
+  - name: savora-db
+    databaseName: savora
+    user: savora
+    plan: free
+    # Must match the web service's region, otherwise the internal connection
+    # string below cannot be resolved.
+    region: oregon
+
+services:
+  - type: web
+    name: savora-api
+    runtime: python
+    plan: free
+    region: oregon
+    # The Django project lives in backend/, not at the repository root.
+    rootDir: backend
+    autoDeploy: true
+
+    # migrate/loaddata run here rather than in a pre-deploy command because
+    # pre-deploy commands are not available on Render's free instance types.
+    # loaddata is idempotent: the fixture carries explicit primary keys, so it
+    # updates the existing rows instead of duplicating them.
+    #
+    # dedupe_categories cleans up after the one case where that is not enough:
+    # migration 0004 seeds the six categories on an empty database under its own
+    # primary keys, which do not match the ones in the fixture, leaving each
+    # category present twice.
+    buildCommand: >-
+      pip install -r requirements.txt &&
+      python manage.py collectstatic --noinput &&
+      python manage.py migrate &&
+      python manage.py loaddata initial_data &&
+      python manage.py dedupe_categories &&
+      python manage.py ensure_superuser
+
+    startCommand: gunicorn backend.wsgi:application
+
+    envVars:
+      # The version this project's dependencies were last built against.
+      - key: PYTHON_VERSION
+        value: "3.14.3"
+
+      # Wired automatically to the database declared above.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: savora-db
+          property: connectionString
+
+      # Render generates this once and keeps it; it never enters the repository.
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+
+      - key: DJANGO_DEBUG
+        value: "False"
+
+      # ALLOWED_HOSTS needs no entry here: settings.py appends Render's own
+      # RENDER_EXTERNAL_HOSTNAME automatically.
+
+      # sync: false means "ask me in the dashboard, do not store in git".
+      # Menu photo hosting; without it images are not served in production.
+      - key: CLOUDINARY_URL
+        sync: false
+
+      # Consumed by the ensure_superuser management command. If these are left
+      # unset the command skips instead of failing the build.
+      - key: DJANGO_SUPERUSER_USERNAME
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false

@@ -1,0 +1,179 @@
+/* --- Savora AdminDashboard.css --- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0d0f12; /* Savora Exact Dark Background */
+  color: #f3f4f6;
+  font-family: "Poppins", sans-serif;
+}
+
+.dashboard {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 40px 20px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.dashboard-header h1 {
+  color: #dfbc73; /* Savora Gold Heading Color */
+  font-size: 38px;
+  font-weight: 700;
+}
+
+.add-btn {
+  background: linear-gradient(135deg, #dfbc73 0%, #b89742 100%);
+  color: #0d0f12;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(223, 188, 115, 0.2);
+}
+
+.add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(223, 188, 115, 0.4);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.menu-card {
+  background: #14161c; /* Luxury Card Dark Tone */
+  border: 1px solid rgba(223, 188, 115, 0.25);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+}
+
+.menu-card:hover {
+  transform: translateY(-8px);
+  border-color: #dfbc73;
+}
+
+.card-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(223, 188, 115, 0.2);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.menu-card h3 {
+  color: #ffffff;
+  margin-bottom: 12px;
+  font-size: 24px;
+}
+
+.price {
+  color: #dfbc73; /* Gold Price Tag */
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.edit-btn,
+.delete-btn {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.edit-btn {
+  background: #dfbc73;
+  color: #0d0f12;
+}
+
+.edit-btn:hover {
+  background: #c5a059;
+}
+
+.delete-btn {
+  background: transparent;
+  color: #dfbc73;
+  border: 1.5px solid #dfbc73;
+}
+
+.delete-btn:hover {
+  background: rgba(223, 188, 115, 0.15);
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 1024px) {
+  .dashboard {
+    margin: 30px auto;
+  }
+
+  .dashboard-header h1 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 30px 15px;
+  }
+
+  .dashboard-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+
+  .add-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .menu-card {
+    padding: 20px 18px;
+  }
+
+  .menu-card:hover {
+    transform: none;
+  }
+}

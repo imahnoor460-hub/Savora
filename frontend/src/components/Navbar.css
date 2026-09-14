@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Jost:wght@300;400;500&display=swap');
+
+@keyframes savoraPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+  }
+}
+
+.savora-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding: 18px clamp(20px, 4vw, 64px);
+  background: rgba(14, 14, 16, 0.75);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.navbar-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Logo */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 50%;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  background: linear-gradient(140deg, rgba(243, 227, 178, 0.18), rgba(140, 106, 47, 0.1));
+  color: #F3E3B2;
+}
+
+.brand-title {
+  font-family: 'Cinzel', serif;
+  font-size: 23px;
+  letter-spacing: 0.34em;
+  font-weight: 600;
+  white-space: nowrap;
+  background-image: linear-gradient(100deg, #F6E9C2 0%, #D4AF37 38%, #FFF6DA 52%, #B8862B 70%, #8C6A2F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Nav links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 3vw, 44px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  font-family: 'Jost', sans-serif;
+  font-size: 12.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #E2E8F0;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  color: #D4AF37;
+}
+
+/* Login link */
+.nav-login-btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #F3E3B2;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.nav-login-btn:hover {
+  color: #121212;
+  background: #D4AF37;
+  border-color: #D4AF37;
+}
+
+/* Reserve Button */
+.btn-reserve-link {
+  text-decoration: none;
+}
+
+.btn-reserve {
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  background: linear-gradient(120deg, rgba(212, 175, 55, 0.16), rgba(212, 175, 55, 0.04));
+  color: #F3E3B2;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 11px 22px;
+  border-radius: 2px;
+  cursor: pointer;
+  animation: savoraPulse 3.6s ease-in-out infinite;
+  transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease;
+}
+
+.btn-reserve:hover {
+  background: linear-gradient(120deg, #D4AF37, #8C6A2F);
+  color: #121212;
+  transform: translateY(-2px);
+}
+
+.logout-btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: transparent;
+  color: #F3E3B2;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #D4AF37;
+  color: #121212;
+}
+
+/* Mobile Responsive */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background-color: #D4AF37;
+}
+
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: #0E0D0C;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    transition: right 0.3s ease;
+  }
+
+  .nav-links-open {
+    right: 0;
+  }
+}
