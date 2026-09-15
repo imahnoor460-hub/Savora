@@ -328,3 +328,18 @@
     max-width: 100%;
   }
 }
+/* Right-hand showcase column (rendered from Menu.jsx, which keeps the rest of
+   its styling inline). Sticky beside the dish list on desktop; static once the
+   two stack, where a sticky card would ride over the dishes below it.
+   150px = the 70px fixed navbar + the sticky category bar beneath it. */
+.menu-showcase-sticky {
+  position: sticky;
+  top: 150px;
+}
+
+@media (max-width: 900px) {
+  .menu-showcase-sticky {
+    position: static;
+    top: auto;
+  }
+}

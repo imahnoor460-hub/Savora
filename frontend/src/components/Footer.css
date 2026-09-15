@@ -143,3 +143,64 @@
   text-transform: uppercase;
   color: #6E7480;
 }
+/* ---- Mobile ---- */
+@media (max-width: 768px) {
+  .custom-footer {
+    padding: 56px 20px 26px;
+  }
+
+  .footer-container {
+    gap: 30px;
+  }
+
+  .footer-brand {
+    font-size: 19px;
+    letter-spacing: 0.26em;
+  }
+
+  .footer-address {
+    max-width: 100%;
+    margin-top: 14px;
+  }
+
+  .hours-list,
+  .contact-list {
+    margin-top: 14px;
+  }
+
+  /* The phone / email links were 21px tall — under the 44px tap target, and
+     close enough together to mis-tap. Padding widens the hit area without
+     moving the text. */
+  .contact-list {
+    gap: 2px;
+  }
+
+  .footer-link {
+    display: inline-block;
+    padding: 9px 0;
+  }
+
+  /* A nowrap pill beside a nowrap label was the widest thing in the column */
+  .btn-join-list {
+    width: 100%;
+    padding: 15px 20px;
+  }
+
+  .footer-bottom {
+    gap: 8px;
+    margin-top: 38px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+}
+
+@media (max-width: 380px) {
+  .custom-footer {
+    padding: 48px 16px 24px;
+  }
+
+  .hours-row {
+    /* The dotted leader has nothing left to give at this width */
+    font-size: 12.5px;
+  }
+}

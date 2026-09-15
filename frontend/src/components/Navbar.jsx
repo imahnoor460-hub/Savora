@@ -16,6 +16,17 @@ function Navbar() {
     setMenuOpen(false);
   }
 
+  // The drawer covers the viewport, so the page behind it must not scroll —
+  // otherwise a swipe on the drawer scrolls the page underneath instead.
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [menuOpen]);
+
   const handleLogout = () => {
     setMenuOpen(false);
     localStorage.removeItem("token");

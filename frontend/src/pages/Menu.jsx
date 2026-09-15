@@ -139,7 +139,7 @@ export default function Menu() {
             <p style={{ margin: 0, maxWidth: "320px", fontSize: "14px", lineHeight: 1.8, color: "#8A8F98", fontWeight: 300 }}>Hover any dish to plate it. Select one for the full tasting detail.</p>      
           </div>
 
-          <div style={{ display: "flex", flexWrap: "wrap", alignitems: "flex-start", gap: "clamp(28px,3.4vw,64px)" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-start", gap: "clamp(28px,3.4vw,64px)" }}>
             <div style={{ flex: "1 1 400px", minWidth: 0, display: "flex", flexDirection: "column", gap: "16px" }}>          
               {filteredItems.length > 0 ? (
                 filteredItems.map((item) => (
@@ -174,14 +174,14 @@ export default function Menu() {
             </div>
 
             {/* Right Sticky Showcase Card */}
-            <div style={{ flex: "0 1 360px", minWidth: "290px", position: "sticky", top: "150px", display: "flex", flexDirection: "column", alignItems: "center", perspective: "1400px" }}>          
+            <div className="menu-showcase-sticky" style={{ flex: "0 1 360px", minWidth: "min(290px, 100%)", display: "flex", flexDirection: "column", alignItems: "center", perspective: "1400px" }}>          
               <div 
                 ref={cardRef}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
                 style={{ position: "relative", width: "100%", padding: "clamp(24px,2.6vw,36px)", borderRadius: "8px", transformStyle: "preserve-3d", transition: "transform .5s cubic-bezier(.2,.7,.2,1)", background: "linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.012) 45%, rgba(212,175,55,.04))", backdropFilter: "blur(22px)", WebkitBackdropFilter: "blur(22px)", border: "1px solid rgba(212,175,55,.22)", boxShadow: "0 60px 120px -50px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.07)" }}
               >
-                <div style={{ display: "flex", alignItems: "center", justifycontent: "space-between", transform: "translateZ(28px)" }}>              
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", transform: "translateZ(28px)" }}>              
                   <span style={{ fontSize: "10px", letterSpacing: ".34em", textTransform: "uppercase", color: "#C9B27A" }}>Now plating</span>              
                   <span style={{ fontFamily: "'Cinzel',serif", fontSize: "11px", letterSpacing: ".2em", color: "rgba(212,175,55,.6)" }}>№ {activeItem?.id ? String(activeItem.id).padStart(2, '0') : "04"}</span>            
                 </div>

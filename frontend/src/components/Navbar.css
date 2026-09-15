@@ -159,7 +159,14 @@
 .nav-toggle {
   display: none;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
+  /* 44px is the tap target; the negative margin keeps it from making the
+     bar taller than the 70px the Menu page offsets its content by. */
+  width: 44px;
+  height: 44px;
+  margin: -5px -10px -5px 0;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -169,27 +176,107 @@
   width: 24px;
   height: 2px;
   background-color: #D4AF37;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+/* Bars fold into a cross while the drawer is open */
+.nav-toggle-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 @media (max-width: 768px) {
+  .savora-navbar {
+    padding: 18px 20px;
+  }
+
   .nav-toggle {
     display: flex;
   }
 
+  /* The drawer is translated off-screen rather than parked at right: -100%.
+     A fixed element sitting outside the viewport still widens it on mobile
+     Safari, and overflow-x: hidden on <body> does not clip fixed children —
+     that was the sideways scroll on every page. visibility keeps the closed
+     drawer out of the tab order. */
   .nav-links {
     position: fixed;
     top: 70px;
-    right: -100%;
-    width: 100%;
+    left: 0;
+    right: 0;
+    width: auto;
     height: calc(100vh - 70px);
+    height: calc(100dvh - 70px);
+    padding: 36px 24px;
     background: #0E0D0C;
     flex-direction: column;
     justify-content: center;
-    gap: 28px;
-    transition: right 0.3s ease;
+    gap: 22px;
+    overflow-y: auto;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.3s ease, visibility 0s linear 0.3s;
   }
 
   .nav-links-open {
-    right: 0;
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.3s ease, visibility 0s;
+  }
+
+  /* Drawer entries become full-width rows so each one is a real tap target
+     instead of a line of 12px letter-spaced text. */
+  .nav-links li {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .nav-item,
+  .nav-login-btn,
+  .btn-reserve,
+  .logout-btn {
+    display: block;
+    width: 100%;
+    padding: 15px 18px;
+    text-align: center;
+  }
+
+  .nav-item {
+    font-size: 13px;
+    border: 1px solid rgba(212, 175, 55, 0.14);
+    border-radius: 2px;
+  }
+
+  .btn-reserve {
+    /* the glow pulse reads as a flicker on a full-width bar */
+    animation: none;
+  }
+
+  .btn-reserve:hover {
+    transform: none;
+  }
+}
+
+/* Small phones: the brand lock-up is the only thing that has to shrink —
+   the 70px bar height stays put, because Menu.jsx offsets against it. */
+@media (max-width: 400px) {
+  .savora-navbar {
+    padding: 18px 16px;
+  }
+
+  .brand-title {
+    font-size: 19px;
+    letter-spacing: 0.22em;
+  }
+
+  .navbar-brand {
+    gap: 10px;
   }
 }

@@ -42,7 +42,11 @@
 /* HERO SECTION */
 .savora-hero-section {
   position: relative;
+  /* 100vh on a phone is the height with the URL bar hidden, so the hero was
+     taller than the screen and the fold sat under the browser chrome. svh is
+     the *visible* height; the vh line stays as the fallback. */
   min-height: min(980px, 100vh);
+  min-height: min(980px, 100svh);
   display: flex;
   align-items: center;
   padding: clamp(140px, 16vh, 190px) clamp(20px, 5vw, 80px) clamp(80px, 10vh, 120px);
@@ -80,7 +84,10 @@
   position: relative;
   z-index: 3;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  /* min() so the track can fall below 320px. Plain minmax(320px, 1fr) keeps
+     a 320px track even on a 320px-wide phone, where the page padding leaves
+     only ~280px — that surplus was the horizontal scroll on the home page. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   align-items: center;
   gap: clamp(40px, 6vw, 80px);
   width: 100%;
@@ -915,17 +922,10 @@
   color: #8a8f98;
 }
 
-/* The offset frame needs room beside the photo; at narrow widths there is
-   none, so it reads as a stray box. Drop it there. */
-@media (max-width: 768px) {
-  .story-image-card::before {
-    display: none;
-  }
-}
-
 /* Story as a standalone page: extra top room for the fixed navbar. */
 .story-page {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   padding-top: clamp(130px, 16vh, 190px);
@@ -936,4 +936,360 @@
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 38px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   The layout above is written desktop-first; everything below narrows it.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ---- Tablet ---- */
+@media (max-width: 1024px) {
+  .savora-hero-section {
+    padding-top: clamp(120px, 14vh, 160px);
+  }
+
+  .hero-title {
+    font-size: clamp(46px, 8vw, 76px);
+  }
+
+  .float-badge-top {
+    top: -56px;
+    left: 0;
+  }
+}
+
+/* Once the menu's two columns stack, a sticky showcase card just rides over
+   the dish list below it, so it stops tracking. */
+@media (max-width: 900px) {
+  .menu-showcase-column {
+    position: static;
+    top: auto;
+  }
+}
+
+/* ---- Phones ---- */
+@media (max-width: 768px) {
+  /* ── Hero ────────────────────────────────────────────────────────── */
+  .savora-hero-section {
+    /* Stacked, the hero is taller than the screen anyway; a min-height
+       only left a dead band under the fold. */
+    min-height: auto;
+    padding: 118px 20px 88px;
+  }
+
+  /* Extra room between the stacked columns: the top badge overhangs the
+     card by 24px and would otherwise crowd the stats rule above it. */
+  .hero-container {
+    gap: 60px;
+  }
+
+  .hero-text-block {
+    max-width: 100%;
+  }
+
+  .hero-badge {
+    margin-bottom: 20px;
+  }
+
+  .badge-line {
+    width: 32px;
+  }
+
+  .badge-text {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+  }
+
+  .hero-title {
+    /* The clamp floor was 54px, so "Extraordinary" was wider than a 360px
+       screen and pushed the page sideways. */
+    font-size: clamp(38px, 12.5vw, 58px);
+    line-height: 1.02;
+  }
+
+  .hero-description {
+    margin-top: 22px;
+    max-width: 100%;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    margin-top: 32px;
+    gap: 12px;
+  }
+
+  /* The CTAs are nowrap pills with 40px of side padding — side by side they
+     left no gutter, so each takes its own full-width row. */
+  .btn-gold-primary,
+  .btn-outline-light {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 20px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+  }
+
+  .hero-stats {
+    gap: 22px;
+    margin-top: 36px;
+    padding-top: 22px;
+  }
+
+  .stat-number {
+    font-size: 22px;
+  }
+
+  .stat-label {
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+  }
+
+  /* ── Hero card ───────────────────────────────────────────────────── */
+  .hero-3d-card {
+    aspect-ratio: 0.92;
+  }
+
+  .card-header {
+    top: 16px;
+    left: 18px;
+    right: 18px;
+  }
+
+  .card-footer {
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+  }
+
+  .dish-title {
+    font-size: 25px;
+  }
+
+  /* Both badges sat on negative offsets wide enough to clear the card on a
+     desktop column. On a phone that put one over the hero copy and the other
+     outside the viewport, so they move onto the card's own corners. Only
+     left/right change — the float keyframes own `transform`. */
+  .float-badge-top {
+    top: -32px;
+    left: 8px;
+    padding: 9px 16px 9px 10px;
+  }
+
+  .star-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+
+  .badge-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  }
+
+  /* Clear of the card entirely: at phone width the card footer (dish name,
+     sub-line, price) runs the full width, so an overlapping badge sat on top
+     of the price. */
+  .float-badge-bottom {
+    bottom: -56px;
+    right: 8px;
+    padding: 11px 16px;
+  }
+
+  .float-status {
+    font-size: 18px;
+  }
+
+  /* ── Menu section ────────────────────────────────────────────────── */
+  .savora-menu-section {
+    padding: 72px 20px;
+  }
+
+  .menu-header {
+    gap: 14px;
+    margin-bottom: 34px;
+  }
+
+  .menu-title {
+    font-size: clamp(30px, 9vw, 44px);
+  }
+
+  .menu-instruction {
+    max-width: 100%;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+
+  .menu-grid {
+    gap: 46px;
+  }
+
+  .menu-categories-column {
+    gap: 34px;
+  }
+
+  /* The numeral, a nowrap category name, a flexible rule and a nowrap
+     "Wine Pairing Available" cannot share one phone-width line — the row
+     overflowed. It wraps now, and the pairing note (decoration) is dropped. */
+  .category-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .cat-name {
+    white-space: normal;
+    font-size: 24px;
+  }
+
+  .cat-pairing {
+    display: none;
+  }
+
+  .item-name {
+    font-size: 19px;
+  }
+
+  .item-price {
+    font-size: 14px;
+  }
+
+  .item-note {
+    font-size: 12.5px;
+  }
+
+  .menu-item-row {
+    padding: 14px 0;
+  }
+
+  /* :hover sticks after a tap on touch, and the 10px indent left the row
+     permanently out of line with its neighbours. */
+  .menu-item-row.active-row,
+  .menu-item-row:hover {
+    padding-left: 0;
+  }
+
+  .showcase-card {
+    padding: 24px 20px;
+  }
+
+  .showcase-name {
+    font-size: 23px;
+  }
+
+  .showcase-note {
+    font-size: 13px;
+  }
+
+  .view-full-menu-container {
+    margin-top: 36px;
+  }
+
+  /* ── Story section ───────────────────────────────────────────────── */
+  .savora-story-section {
+    padding: 72px 20px;
+  }
+
+  /* The offset gold frame needs room beside the photo; at narrow widths
+     there is none, so it reads as a stray box. */
+  .story-image-card::before {
+    display: none;
+  }
+
+  .story-container {
+    gap: 36px;
+  }
+
+  .story-subtitle {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+  }
+
+  .story-subtitle::after {
+    flex-basis: 34px;
+  }
+
+  .story-title {
+    margin-top: 16px;
+    font-size: clamp(28px, 8.5vw, 42px);
+  }
+
+  .story-paragraph {
+    margin-top: 20px;
+    max-width: 100%;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .story-chef {
+    margin-top: 30px;
+    padding-top: 22px;
+    font-size: 21px;
+  }
+
+  /* Story as its own page */
+  .story-page {
+    min-height: auto;
+    padding-top: 112px;
+  }
+
+  .story-page-actions {
+    gap: 12px;
+    margin-top: 30px;
+  }
+}
+
+/* ---- Small phones ---- */
+@media (max-width: 380px) {
+  .savora-hero-section {
+    padding: 110px 16px 80px;
+  }
+
+  .savora-menu-section,
+  .savora-story-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  /* "Est. 2011 · Two Michelin Stars" at 0.28em tracking is wider than a
+     320px screen once the gold rule is beside it. */
+  .badge-text {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+  }
+
+  .badge-line {
+    width: 22px;
+  }
+
+  .hero-badge {
+    gap: 10px;
+  }
+
+  .hero-stats {
+    gap: 16px;
+  }
+
+  .cat-name {
+    font-size: 21px;
+  }
+}
+
+/* ---- Short landscape phones: the tall top padding eats the whole screen ---- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .savora-hero-section {
+    min-height: auto;
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+
+  .story-page {
+    min-height: auto;
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
 }
