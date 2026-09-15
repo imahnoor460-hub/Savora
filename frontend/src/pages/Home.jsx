@@ -218,7 +218,12 @@ function Home() {
               <h2 className="menu-title">Featured Menu</h2>
             </div>
             <p className="menu-instruction">
-              Hover over a dish to view it. Select one to open the tasting detail.
+              <span className="instruction-pointer">
+                Hover over a dish to view it. Select one to open the tasting detail.
+              </span>
+              <span className="instruction-touch">
+                Tap a dish to open the tasting detail.
+              </span>
             </p>
           </div>
 

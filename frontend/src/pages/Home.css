@@ -313,7 +313,12 @@
   left: 50%;
   width: 92%;
   aspect-ratio: 1;
-  transform: translate(-50%, -52%) translateZ(20px);
+  /* Centred with the standalone `translate` property, not `transform`: the
+     savoraSpin keyframes own `transform`, and while they ran they replaced a
+     translate(-50%, -52%) there, so the ring sat down and to the right of the
+     dish and ran out of the card. */
+  translate: -50% -52%;
+  transform: translateZ(20px);
   border: 1px solid rgba(212, 175, 55, 0.22);
   border-radius: 50%;
   pointer-events: none;
@@ -500,6 +505,23 @@
   line-height: 1.8;
   color: #8a8f98;
   font-weight: 300;
+}
+
+/* Touch screens have no hover, so they get their own instruction. Keyed on
+   the input device rather than screen width, so a touch laptop or an iPad
+   gets the tap wording too. */
+.instruction-touch {
+  display: none;
+}
+
+@media (hover: none) {
+  .instruction-pointer {
+    display: none;
+  }
+
+  .instruction-touch {
+    display: inline;
+  }
 }
 
 .menu-grid {
@@ -975,13 +997,13 @@
     /* Stacked, the hero is taller than the screen anyway; a min-height
        only left a dead band under the fold. */
     min-height: auto;
-    padding: 118px 20px 88px;
+    padding: 112px 20px 64px;
   }
 
   /* Extra room between the stacked columns: the top badge overhangs the
-     card by 24px and would otherwise crowd the stats rule above it. */
+     card by 20px and would otherwise crowd the stats above it. */
   .hero-container {
-    gap: 60px;
+    gap: 56px;
   }
 
   .hero-text-block {
@@ -1004,36 +1026,45 @@
   .hero-title {
     /* The clamp floor was 54px, so "Extraordinary" was wider than a 360px
        screen and pushed the page sideways. */
-    font-size: clamp(38px, 12.5vw, 58px);
-    line-height: 1.02;
+    font-size: clamp(36px, 11.5vw, 52px);
+    line-height: 1.04;
   }
 
   .hero-description {
-    margin-top: 22px;
+    margin-top: 18px;
     max-width: 100%;
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 14.5px;
+    line-height: 1.65;
   }
 
   .hero-actions {
-    margin-top: 32px;
+    flex-direction: column;
+    margin-top: 28px;
     gap: 12px;
   }
 
   /* The CTAs are nowrap pills with 40px of side padding — side by side they
-     left no gutter, so each takes its own full-width row. */
+     left no gutter, so each takes its own full-width row. 50px keeps both
+     comfortably above the 44px minimum tap target. */
   .btn-gold-primary,
   .btn-outline-light {
     width: 100%;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    padding: 16px 20px;
+    padding: 14px 20px;
     font-size: 11px;
     letter-spacing: 0.2em;
   }
 
+  /* Three equal columns instead of a wrapping row: flex with a fixed gap left
+     the three figures unevenly spaced and hugging the left edge. */
   .hero-stats {
-    gap: 22px;
-    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 32px;
     padding-top: 22px;
   }
 
@@ -1043,18 +1074,38 @@
 
   .stat-label {
     font-size: 9.5px;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.16em;
+    line-height: 1.4;
   }
 
   /* ── Hero card ───────────────────────────────────────────────────── */
+  .hero-card-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .hero-3d-card {
     aspect-ratio: 0.92;
   }
 
+  /* Pushed down so the top badge, which straddles the card's top edge, has
+     its own band and does not sit on "Signature · № 07". */
   .card-header {
-    top: 16px;
+    top: 34px;
     left: 18px;
     right: 18px;
+  }
+
+  /* At full phone width the desktop 74% plate ran down behind the dish name.
+     A smaller plate set slightly higher leaves the footer a clear band. */
+  .card-dish-image-container {
+    width: 60%;
+    transform: translate(-50%, -54%) translateZ(70px);
+  }
+
+  .card-orbit-ring {
+    width: 76%;
+    translate: -50% -54%;
   }
 
   .card-footer {
@@ -1063,18 +1114,34 @@
     bottom: 18px;
   }
 
+  /* A long dish name from the API wraps to two lines at most rather than
+     climbing up over the plate. */
   .dish-title {
-    font-size: 25px;
+    font-size: 23px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  .dish-sub {
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+  }
+
+  .dish-price {
+    font-size: 15px;
   }
 
   /* Both badges sat on negative offsets wide enough to clear the card on a
-     desktop column. On a phone that put one over the hero copy and the other
-     outside the viewport, so they move onto the card's own corners. Only
-     left/right change — the float keyframes own `transform`. */
+     desktop column. On a phone the top one covered the stats and the bottom
+     one covered the card's lower edge and hung below it. The top one now
+     straddles the card's top edge; only top/left change — the float
+     keyframes own `transform`. */
   .float-badge-top {
-    top: -32px;
-    left: 8px;
-    padding: 9px 16px 9px 10px;
+    top: -20px;
+    left: 16px;
+    padding: 8px 16px 8px 9px;
   }
 
   .star-icon {
@@ -1088,17 +1155,23 @@
     letter-spacing: 0.18em;
   }
 
-  /* Clear of the card entirely: at phone width the card footer (dish name,
-     sub-line, price) runs the full width, so an overlapping badge sat on top
-     of the price. */
+  /* In the flow under the card rather than absolutely placed: any overlap put
+     it over the price, and hanging below the card it could be clipped by the
+     hero's overflow: hidden. One compact line: "Tonight  3 seats remaining". */
   .float-badge-bottom {
-    bottom: -56px;
-    right: 8px;
-    padding: 11px 16px;
+    position: relative;
+    bottom: auto;
+    right: auto;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-top: 18px;
+    padding: 10px 18px;
   }
 
   .float-status {
     font-size: 18px;
+    margin-top: 0;
   }
 
   /* ── Menu section ────────────────────────────────────────────────── */
@@ -1242,7 +1315,7 @@
 /* ---- Small phones ---- */
 @media (max-width: 380px) {
   .savora-hero-section {
-    padding: 110px 16px 80px;
+    padding: 104px 16px 56px;
   }
 
   .savora-menu-section,
@@ -1271,7 +1344,16 @@
   }
 
   .hero-stats {
-    gap: 16px;
+    gap: 8px;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+
+  .badge-label {
+    letter-spacing: 0.14em;
   }
 
   .cat-name {
