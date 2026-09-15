@@ -612,6 +612,11 @@
   color: #d4af37;
 }
 
+/* Only shown on phones, where the showcase card is hidden. */
+.item-thumb {
+  display: none;
+}
+
 .item-note {
   display: block;
   margin-top: 6px;
@@ -1348,6 +1353,77 @@
     gap: 12px;
     margin-top: 30px;
   }
+
+  /* ── Dish pictures beside their dishes ───────────────────────────── */
+  /* Stacked, the "Now plating" card came after all nine dishes, so the
+     picture for a dish near the top was a long scroll away. Each row now
+     carries its own picture and the separate card goes; a tap still opens
+     the tasting detail. */
+  .menu-showcase-column {
+    display: none;
+  }
+
+  .menu-item-row {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    column-gap: 14px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .item-thumb {
+    display: block;
+    grid-row: 1 / span 2;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.35);
+  }
+
+  .item-title-line,
+  .item-note {
+    grid-column: 2;
+  }
+}
+
+/* ---- Hero picture under the title ----
+   Once the hero is one column (below 736px: two 320px tracks plus the 56px
+   gap and 40px of padding no longer fit) the dish card came after the copy,
+   both buttons and the stats. display: contents lets the text block's
+   children share the grid with the card so it can sit under the title. */
+@media (max-width: 735px) {
+  .hero-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .hero-text-block {
+    display: contents;
+  }
+
+  .hero-badge,
+  .hero-title,
+  .hero-description,
+  .hero-actions,
+  .hero-stats {
+    animation: savoraRise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .hero-badge { order: 1; }
+  .hero-title { order: 2; }
+  .hero-card-wrapper {
+    order: 3;
+    /* As wide as the card (it caps at 520px), so the badges, placed from
+       the wrapper's edges, stay on the card instead of the screen edge. */
+    justify-self: center;
+    width: min(100%, 520px);
+    /* The top badge overhangs the card by 20px. */
+    margin: 48px 0 10px;
+  }
+  .hero-description { order: 4; }
+  .hero-actions { order: 5; }
+  .hero-stats { order: 6; }
 }
 
 /* ---- Small phones ---- */

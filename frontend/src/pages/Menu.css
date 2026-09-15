@@ -348,3 +348,40 @@
     top: auto;
   }
 }
+
+/* Only shown once the showcase card is gone (below). */
+.menu-dish-thumb {
+  display: none;
+}
+
+/* Below ~860px the showcase card wrapped under the whole dish list, so a
+   dish's picture was a long scroll from the dish. Each card now carries its
+   own picture and the separate showcase goes; a tap still opens the tasting
+   detail. !important because Menu.jsx sets display inline on the card. */
+@media (max-width: 900px) {
+  .menu-showcase-sticky {
+    display: none !important;
+  }
+
+  .menu-dish-button {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    column-gap: 16px;
+    align-items: start;
+  }
+
+  .menu-dish-button > * {
+    grid-column: 2;
+  }
+
+  .menu-dish-button > .menu-dish-thumb {
+    display: block;
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.35);
+  }
+}

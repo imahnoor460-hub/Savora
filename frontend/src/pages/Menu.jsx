@@ -4,6 +4,7 @@ import "./Menu.css";
 import defaultDishImg from "../assets/food.jpg";
 import DishDetailModal from "../components/DishDetailModal";
 import { API_BASE } from "../api";
+import { thumbUrl } from "../thumbUrl";
 
 // The global <Navbar /> in App.jsx is position: fixed, so it sits outside the
 // document flow and covers whatever starts at y=0. 70px is its height (18px
@@ -153,11 +154,13 @@ export default function Menu() {
                   <button 
                     key={item.id} 
                     type="button" 
+                    className="menu-dish-button"
                     onMouseEnter={() => setActiveItem(item)}
                     onFocus={() => setActiveItem(item)}
                     onClick={() => handleDishSelect(item)}
                     style={{ background: activeItem?.id === item.id ? "rgba(25, 25, 25, 0.9)" : "rgba(20, 20, 20, 0.6)", border: "1px solid", borderColor: activeItem?.id === item.id ? "rgba(212, 175, 55, 0.4)" : "rgba(255, 255, 255, 0.06)", borderRadius: "6px", padding: "24px", textAlign: "left", cursor: "pointer", width: "100%" }}
                   >              
+                    <img src={thumbUrl(item.image) || defaultDishImg} alt="" loading="lazy" className="menu-dish-thumb" />
                     <span style={{ display: "flex", alignItems: "baseline", gap: "12px" }}>                
                       <span style={{ flex: "0 1 auto", fontFamily: "'Cormorant Garamond',serif", fontSize: "22px", lineHeight: 1.2, color: "#F4F1EA" }}>{item.name}</span>                
                       <span style={{ flex: "1 1 auto", minWidth: "22px", height: "1px", borderBottom: "1px dotted rgba(212,175,55,.55)" }}></span>                

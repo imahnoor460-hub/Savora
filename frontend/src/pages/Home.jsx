@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import DishDetailModal from "../components/DishDetailModal";
 import { API_BASE } from "../api";
+import { thumbUrl } from "../thumbUrl";
 
 import heroImage from "../assets/res.jpg";
 import storyImage from "../assets/story.jpg";
@@ -256,6 +257,12 @@ function Home() {
                                 setModalOpen(true);
                               }}
                             >
+                              <img
+                                src={thumbUrl(item.image) || reserveImage}
+                                alt=""
+                                loading="lazy"
+                                className="item-thumb"
+                              />
                               <span className="item-title-line">
                                 <span className="item-name">{item.name}</span>
                                 <span className="item-dots"></span>
@@ -290,6 +297,12 @@ function Home() {
                           setModalOpen(true);
                         }}
                       >
+                        <img
+                          src={thumbUrl(item.image) || reserveImage}
+                          alt=""
+                          loading="lazy"
+                          className="item-thumb"
+                        />
                         <span className="item-title-line">
                           <span className="item-name">{item.name}</span>
                           <span className="item-dots"></span>
