@@ -335,6 +335,11 @@
 .menu-showcase-sticky {
   position: sticky;
   top: 150px;
+  /* Centres the card once it wraps under the dish list (portrait tablets),
+     where it otherwise sat hard left beside an empty half of the page.
+     Side by side the list grows to fill the row, so there is no free space
+     for the auto margins to take and nothing moves. */
+  margin-inline: auto;
 }
 
 @media (max-width: 900px) {

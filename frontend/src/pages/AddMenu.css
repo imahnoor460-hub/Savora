@@ -237,6 +237,24 @@ body {
   background: rgba(223, 188, 115, 0.1);
 }
 
+/* iPads are wider than the phone breakpoint but zoom on a <16px field just
+   the same, so touch devices get 16px at any width. */
+@media (pointer: coarse) {
+  .edit-container input[type="text"],
+  .edit-container input[type="number"],
+  .edit-container input[type="email"],
+  .edit-container textarea,
+  .edit-container select,
+  .form-container input[type="text"],
+  .form-container input[type="number"],
+  .form-container input[type="email"],
+  .form-container textarea,
+  .form-container select,
+  .image-field input[type="file"] {
+    font-size: 16px;
+  }
+}
+
 /* =============================================
    Responsive Design
    ============================================= */

@@ -194,6 +194,15 @@
   }
 }
 
+/* The phone number and email are 21px-tall text on a tablet, too thin to hit
+   reliably with a finger; the phone breakpoint already pads them. */
+@media (pointer: coarse) {
+  .footer-link {
+    display: inline-block;
+    padding: 9px 0;
+  }
+}
+
 @media (max-width: 380px) {
   .custom-footer {
     padding: 48px 16px 24px;

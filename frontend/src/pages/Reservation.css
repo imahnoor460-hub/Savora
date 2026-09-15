@@ -236,11 +236,46 @@
 /* ---- Tablet ---- */
 @media (max-width: 1024px) {
     .reservation-page {
-        gap: 40px;
+        gap: 36px;
+        padding-left: 40px;
+        padding-right: 40px;
     }
 
     .reservation-image img {
         min-height: 340px;
+    }
+}
+
+/* ---- Portrait tablet: stack ----
+   Side by side, the form column was ~340px, so its two-up fields were too
+   narrow for the phone placeholder and the date picker's "mm/dd/yyyy". */
+@media (max-width: 900px) {
+    .reservation-page {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .reservation-form,
+    .reservation-image {
+        flex: none;
+        width: 100%;
+        max-width: 640px;
+    }
+
+    .reservation-image img {
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+    }
+}
+
+/* iPads are wider than the phone breakpoint but zoom on a <16px field just
+   the same, so touch devices get 16px at any width. */
+@media (pointer: coarse) {
+    .reservation-page .input-group input,
+    .reservation-page .input-group select,
+    .reservation-page .input-group textarea {
+        font-size: 16px;
     }
 }
 

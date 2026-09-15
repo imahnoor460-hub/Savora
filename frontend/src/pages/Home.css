@@ -954,13 +954,68 @@
     padding-top: clamp(120px, 14vh, 160px);
   }
 
+  /* Two columns of ~320–430px here. At 8vw "Extraordinary" filled ~93% of
+     its column, so it looked cramped and, until Cormorant loaded, the wider
+     fallback serif broke it mid-word ("Extraordinar / y"). */
   .hero-title {
-    font-size: clamp(46px, 8vw, 76px);
+    font-size: clamp(44px, 6.8vw, 68px);
+  }
+
+  /* "Est. 2011 · Two Michelin Stars" wrapped "Stars" onto a second line
+     below ~900px. */
+  .badge-line {
+    width: 40px;
+  }
+
+  .badge-text {
+    font-size: 10.5px;
+    letter-spacing: 0.3em;
   }
 
   .float-badge-top {
     top: -56px;
     left: 0;
+  }
+
+  /* The desktop offset left the badge 3–7px under the dish price on a card
+     this narrow, so the two read as one cramped block. */
+  .float-badge-bottom {
+    bottom: -84px;
+  }
+
+  /* A ~345px-wide card: a two-line dish name ("A5 Wagyu & Gold Leaf Steak")
+     climbed over the plate. A slightly taller card, smaller plate and
+     smaller title give the footer its own band. */
+  .hero-3d-card {
+    aspect-ratio: 0.8;
+  }
+
+  .card-dish-image-container {
+    width: 60%;
+    transform: translate(-50%, -56%) translateZ(70px);
+  }
+
+  .card-orbit-ring {
+    width: 76%;
+    translate: -50% -56%;
+  }
+
+  .dish-title {
+    font-size: 26px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  /* "Wine Pairing Available" is nowrap decoration; the dish column is too
+     narrow for it beside the category name, so it was cut off. */
+  .category-header {
+    flex-wrap: wrap;
+  }
+
+  .cat-pairing {
+    display: none;
   }
 }
 
