@@ -104,7 +104,11 @@ export default function Menu() {
   };
 
   return (
-    <div style={{ background: "#0C0C0D", color: "#E2E8F0", fontFamily: "'Jost',system-ui,sans-serif", minHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)`, paddingTop: NAVBAR_HEIGHT, position: "relative", overflowX: "hidden" }}>
+    <div style={{ background: "#0C0C0D", color: "#E2E8F0", fontFamily: "'Jost',system-ui,sans-serif", minHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)`, paddingTop: NAVBAR_HEIGHT, position: "relative", overflowX: "clip" }}>
+      {/* overflowX "clip", not "hidden": "hidden" turned this div into a scroll
+          container, so the sticky category bar measured top: 70 from inside
+          its 70px padding. It sat 70px too low over the page heading and never
+          stuck on scroll (nor did the showcase card). */}
       <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 1, opacity: ".5", backgroundImage: "radial-gradient(rgba(255,255,255,.055) 1px, transparent 1px)", backgroundSize: "3px 3px", mixBlendMode: "overlay" }}></div>
       
       {/* Category tabs. The site header itself is the global <Navbar />; this
@@ -136,7 +140,10 @@ export default function Menu() {
                 {activeCategory || "Menu"}
               </h1>        
             </div>        
-            <p style={{ margin: 0, maxWidth: "320px", fontSize: "14px", lineHeight: 1.8, color: "#8A8F98", fontWeight: 300 }}>Hover any dish to plate it. Select one for the full tasting detail.</p>      
+            <p style={{ margin: 0, maxWidth: "320px", fontSize: "14px", lineHeight: 1.8, color: "#8A8F98", fontWeight: 300 }}>
+              <span className="instruction-pointer">Hover any dish to plate it. Select one for the full tasting detail.</span>
+              <span className="instruction-touch">Tap a dish for the full tasting detail.</span>
+            </p>      
           </div>
 
           <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-start", gap: "clamp(28px,3.4vw,64px)" }}>

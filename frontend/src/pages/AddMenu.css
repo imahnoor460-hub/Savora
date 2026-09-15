@@ -243,20 +243,62 @@ body {
 @media (max-width: 768px) {
   .edit-container, .form-container {
     max-width: 700px;
-    margin: 90px auto 40px auto; 
-    padding: 15px;
+    margin: 90px auto 40px auto;
+    padding: 12px 16px;
   }
 
-  form, .edit-card, .form-card {
-    background: #14161c;
-    border: 1px solid rgba(223, 188, 115, 0.25);
-    border-radius: 16px;
-    padding: 25px 20px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  /* Scoped like the desktop rule. This was a bare `form` selector: it lost
+     to `.form-container form` (so the admin card kept its 35px desktop
+     padding and the fields shrank to ~250px), and it put a bordered box
+     around every other form on the site, e.g. inside the login card. */
+  .edit-container form,
+  .form-container form,
+  .edit-card, .form-card {
+    padding: 22px 18px;
   }
 
   .edit-container h1, .form-container h1 {
     font-size: 28px;
-    margin-bottom: 25px;
+    margin-bottom: 22px;
+  }
+
+  /* 16px stops iOS Safari zooming the page in when a field is focused. */
+  .edit-container input[type="text"],
+  .edit-container input[type="number"],
+  .edit-container input[type="email"],
+  .edit-container textarea,
+  .edit-container select,
+  .form-container input[type="text"],
+  .form-container input[type="number"],
+  .form-container input[type="email"],
+  .form-container textarea,
+  .form-container select {
+    font-size: 16px;
+    min-height: 48px;
+    margin-bottom: 16px;
+  }
+
+  /* Composition holds several lines; the default two rows cut the
+     placeholder off mid-word. */
+  .edit-container textarea,
+  .form-container textarea {
+    min-height: 110px;
+    resize: vertical;
+  }
+
+  .image-field input[type="file"] {
+    font-size: 16px;
+  }
+
+  .edit-container button[type="submit"],
+  .form-container button[type="submit"] {
+    min-height: 50px;
+  }
+
+  /* An 18px box is hard to hit with a thumb; the label is tappable too, but
+     the box itself should read as a target. */
+  .checkbox-row input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
   }
 }

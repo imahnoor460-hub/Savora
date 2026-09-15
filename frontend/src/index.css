@@ -15,8 +15,14 @@ body,
 
 html,
 body {
-  /* Belt-and-braces guard: nothing should scroll the page sideways */
+  /* Belt-and-braces guard: nothing should scroll the page sideways.
+     `clip`, not `hidden`: hidden made <body> a scroll container that never
+     scrolls, and every position: sticky element on the site (the Menu page's
+     category bar and showcase card) stuck to it instead of the window, so
+     none of them stuck. `hidden` stays first as the fallback for browsers
+     without `clip` (Safari before 16). */
   overflow-x: hidden;
+  overflow-x: clip;
   /* Stop iOS from inflating type when a phone is rotated */
   -webkit-text-size-adjust: 100%;
 }
@@ -60,6 +66,23 @@ button {
   select,
   textarea {
     font-size: 16px;
+  }
+}
+
+/* Touch screens have no hover, so instructions come in two wordings (Home and
+   Menu). Keyed on the input device rather than screen width, so a touch
+   laptop or an iPad gets the tap wording too. */
+.instruction-touch {
+  display: none;
+}
+
+@media (hover: none) {
+  .instruction-pointer {
+    display: none;
+  }
+
+  .instruction-touch {
+    display: inline;
   }
 }
 /* Nocturne — design-system tokens and component classes. This file is the source of truth for the system's look; retune it here and see readme.md. */

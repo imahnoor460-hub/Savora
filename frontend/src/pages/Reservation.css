@@ -288,6 +288,8 @@
     .reservation-page .input-group select,
     .reservation-page .input-group textarea {
         min-height: 48px;
+        /* 16px stops iOS Safari zooming the page in when a field is focused. */
+        font-size: 16px;
     }
 
     .reservation-page .reservation-btn {

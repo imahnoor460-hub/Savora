@@ -12,10 +12,12 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+/* The navbar is fixed and ~80px tall, so the page's own top spacing has to
+   clear it; 40px margin + 40px padding left the heading underneath it. */
 .dashboard {
   max-width: 1200px;
-  margin: 40px auto;
-  padding: 40px 20px;
+  margin: 0 auto;
+  padding: 130px 20px 60px;
 }
 
 .dashboard-header {
@@ -134,10 +136,6 @@ body {
    Responsive
    ============================================= */
 @media (max-width: 1024px) {
-  .dashboard {
-    margin: 30px auto;
-  }
-
   .dashboard-header h1 {
     font-size: 32px;
   }
@@ -145,7 +143,7 @@ body {
 
 @media (max-width: 768px) {
   .dashboard {
-    padding: 30px 15px;
+    padding: 100px 16px 40px;
   }
 
   .dashboard-header {
@@ -175,5 +173,10 @@ body {
 
   .menu-card:hover {
     transform: none;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    min-height: 46px;
   }
 }

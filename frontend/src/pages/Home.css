@@ -507,23 +507,6 @@
   font-weight: 300;
 }
 
-/* Touch screens have no hover, so they get their own instruction. Keyed on
-   the input device rather than screen width, so a touch laptop or an iPad
-   gets the tap wording too. */
-.instruction-touch {
-  display: none;
-}
-
-@media (hover: none) {
-  .instruction-pointer {
-    display: none;
-  }
-
-  .instruction-touch {
-    display: inline;
-  }
-}
-
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
