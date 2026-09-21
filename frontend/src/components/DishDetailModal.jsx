@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./DishDetailModal.css";
 import defaultDishImg from "../assets/food.jpg";
+import { formatPrice } from "../formatPrice";
 
 /**
  * Shared tasting-detail popup used by both the Home page and the Menu page.
@@ -51,7 +52,7 @@ export default function DishDetailModal({ item, open, onClose, fallbackImage }) 
   const handleSpinUp = () => setIsDragging(false);
 
   const price = Number(item.price);
-  const priceLabel = Number.isFinite(price) ? `$${price.toFixed(2)}` : "$--";
+  const priceLabel = formatPrice(price);
 
   // Composition arrives as one string holding several ingredients. The admin
   // textarea takes them one per line, which is what every dish currently uses,

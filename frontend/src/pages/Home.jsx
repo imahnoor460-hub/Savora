@@ -8,6 +8,7 @@ import { thumbUrl } from "../thumbUrl";
 import heroImage from "../assets/res.jpg";
 import storyImage from "../assets/story.jpg";
 import reserveImage from "../assets/food.jpg";
+import { formatPrice } from "../formatPrice";
 
 // Which menu item the hero card shows, matched loosely against the dish name.
 const HERO_DISH_MATCH = "wagyu";
@@ -157,18 +158,16 @@ function Home() {
                 <div className="stat-number">18</div>
                 <div className="stat-label">Seats Nightly</div>
               </div>
-              <div>
-                <div className="stat-number">1</div>
-                <div className="stat-label">Seating</div>
-              </div>
             </div>
           </div>
 
           <div data-depth="26" className="hero-card-wrapper">
             <div
               ref={heroCardRef}
-              onMouseMove={(e) => handleTilt(e, heroCardRef)}
-              onMouseLeave={() => resetTilt(heroCardRef)}
+              // Tilt follows a real mouse only: on touch screens a tap also
+              // fires pointer events, which tipped the card on every tap.
+              onPointerMove={(e) => e.pointerType === "mouse" && handleTilt(e, heroCardRef)}
+              onPointerLeave={(e) => e.pointerType === "mouse" && resetTilt(heroCardRef)}
               className="hero-3d-card"
             >
               <div className="card-shine"></div>
@@ -192,7 +191,7 @@ function Home() {
                   <span className="dish-sub">{heroSub}</span>
                   <span className="dish-dots"></span>
                   <span className="dish-price">
-                    {heroDish ? `$${Number(heroDish.price).toFixed(2)}` : "$145"}
+                    {heroDish ? formatPrice(heroDish.price) : "Rs. 145"}
                   </span>
                 </div>
               </div>
@@ -266,7 +265,7 @@ function Home() {
                               <span className="item-title-line">
                                 <span className="item-name">{item.name}</span>
                                 <span className="item-dots"></span>
-                                <span className="item-price">${item.price}</span>
+                                <span className="item-price">{formatPrice(item.price)}</span>
                               </span>
                               <span className="item-note">
                                 {item.description || item.note || "Hand-harvested ingredients cooked over oak fire."}
@@ -306,7 +305,7 @@ function Home() {
                         <span className="item-title-line">
                           <span className="item-name">{item.name}</span>
                           <span className="item-dots"></span>
-                          <span className="item-price">${item.price}</span>
+                          <span className="item-price">{formatPrice(item.price)}</span>
                         </span>
                         <span className="item-note">
                           {item.description || "Hand-harvested ingredients cooked over oak fire."}
@@ -349,7 +348,7 @@ function Home() {
                   <div className="showcase-title-line">
                     <span className="showcase-name">{activeItem?.name || "Select a dish"}</span>
                     <span className="showcase-dots"></span>
-                    <span className="showcase-price">${activeItem?.price || "--"}</span>
+                    <span className="showcase-price">{formatPrice(activeItem?.price)}</span>
                   </div>
                   <p className="showcase-note">
                     {activeItem?.description || activeItem?.note || "A symphony of taste crafted specifically for this evening's seating."}

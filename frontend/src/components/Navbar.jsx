@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [lastPath, setLastPath] = useState(location.pathname);
-
-  const token = localStorage.getItem("token");
 
   if (lastPath !== location.pathname) {
     setLastPath(location.pathname);
@@ -26,12 +23,6 @@ function Navbar() {
       document.body.style.overflow = previous;
     };
   }, [menuOpen]);
-
-  const handleLogout = () => {
-    setMenuOpen(false);
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
 
   return (
     <nav className="savora-navbar">
@@ -78,19 +69,6 @@ function Navbar() {
               </button>
             </NavLink>
           </li>
-          {token ? (
-            <li>
-              <button type="button" onClick={handleLogout} className="logout-btn">
-                Logout
-              </button>
-            </li>
-          ) : (
-            <li>
-              <NavLink to="/login" className="nav-login-btn">
-                Login
-              </NavLink>
-            </li>
-          )}
         </ul>
       </div>
     </nav>

@@ -1105,7 +1105,7 @@
      the three figures unevenly spaced and hugging the left edge. */
   .hero-stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     margin-top: 32px;
     padding-top: 22px;
@@ -1420,6 +1420,77 @@
     width: min(100%, 520px);
     /* The top badge overhangs the card by 20px. */
     margin: 48px 0 10px;
+    /* Lets the card size itself from the wrapper's width (cqw) below. */
+    container-type: inline-size;
+    /* handleParallax writes an inline translate3d of up to ±26px here on
+       every mousemove (and on the mouse events a tap synthesises), which
+       pushed the card down whenever the pointer was in the lower half of the
+       screen. !important is the only way CSS outranks an inline style. */
+    transform: none !important;
+  }
+
+  /* The card was sized by aspect-ratio alone, so its height followed the
+     screen's width, and under the ~250–300px of navbar and title its lower
+     edge ran below the visible viewport. Its height is now capped by the
+     visible height (svh) as well, with a floor so the plate stays legible. */
+  .hero-3d-card {
+    width: 100%;
+    aspect-ratio: auto;
+    height: clamp(290px, calc(100vh - 300px), calc(100cqw / 0.92));
+    height: clamp(290px, calc(100svh - 300px), calc(100cqw / 0.92));
+    /* Header, plate and footer in the flow instead of absolutely placed with
+       fixed offsets: a shorter card squeezed the plate into the dish name.
+       The plate now takes whatever height the header and footer leave. */
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    row-gap: 12px;
+    padding: 34px 18px 18px;
+    container-type: inline-size;
+  }
+
+  /* The translateZ offsets never rendered (backdrop-filter flattens the
+     card's 3D), so dropping them changes nothing visually. */
+  .card-header,
+  .card-footer {
+    position: static;
+    transform: none;
+  }
+
+  .card-dish-image-container,
+  .card-orbit-ring {
+    grid-area: 2 / 1;
+    place-self: center;
+    top: auto;
+    left: auto;
+    translate: none;
+  }
+
+  /* The ring, not the plate, is what has to fit between the header and the
+     dish name: sized from the plate, it ran ~28px past the middle row and
+     into the dish name, so the pair read as sitting low. The ring now takes
+     the row (plus half of each 12px gap), and the plate keeps its 60:76
+     proportion inside it. Both stay square, so both stay circles. */
+  .hero-3d-card {
+    --orbit: min(100% + 12px, 84cqw);
+  }
+
+  .card-orbit-ring {
+    position: relative;
+    width: auto;
+    height: var(--orbit);
+    aspect-ratio: 1;
+  }
+
+  .card-dish-image-container {
+    position: relative;
+    width: auto;
+    height: calc(var(--orbit) * 60 / 76);
+    aspect-ratio: 1;
+    transform: none;
+  }
+
+  .card-dish-image {
+    object-position: center;
   }
   .hero-description { order: 4; }
   .hero-actions { order: 5; }
@@ -1472,6 +1543,20 @@
 
   .cat-name {
     font-size: 21px;
+  }
+
+  /* On these screens the card's height floor leaves a short middle row, so
+     the plate came out small (117px at 320px). The ring may now reach a little
+     further into the gaps, and the plate fills more of the ring. */
+  .hero-3d-card {
+    height: clamp(296px, calc(100vh - 290px), calc(100cqw / 0.92));
+    height: clamp(296px, calc(100svh - 290px), calc(100cqw / 0.92));
+    row-gap: 10px;
+    --orbit: min(100% + 16px, 84cqw);
+  }
+
+  .card-dish-image-container {
+    height: calc(var(--orbit) * 66 / 76);
   }
 }
 

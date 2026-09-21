@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
 import { API_BASE, apiFetch, getErrorMessage } from "../api";
+import { formatPrice } from "../formatPrice";
 
 export default function AdminDashboard() {
   const [menu, setMenu] = useState([]);
@@ -76,7 +77,7 @@ export default function AdminDashboard() {
 
             <h3>{item.name}</h3>
 
-            <p className="price">${item.price}</p>
+            <p className="price">{formatPrice(item.price)}</p>
 
             <div className="card-buttons">
               <button

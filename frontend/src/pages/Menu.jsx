@@ -5,6 +5,7 @@ import defaultDishImg from "../assets/food.jpg";
 import DishDetailModal from "../components/DishDetailModal";
 import { API_BASE } from "../api";
 import { thumbUrl } from "../thumbUrl";
+import { formatPrice } from "../formatPrice";
 
 // The global <Navbar /> in App.jsx is position: fixed, so it sits outside the
 // document flow and covers whatever starts at y=0. 70px is its height (18px
@@ -165,7 +166,7 @@ export default function Menu() {
                       <span style={{ flex: "0 1 auto", fontFamily: "'Cormorant Garamond',serif", fontSize: "22px", lineHeight: 1.2, color: "#F4F1EA" }}>{item.name}</span>                
                       <span style={{ flex: "1 1 auto", minWidth: "22px", height: "1px", borderBottom: "1px dotted rgba(212,175,55,.55)" }}></span>                
                       <span style={{ flex: "0 0 auto", fontFamily: "'Cinzel',serif", fontSize: "15px", color: "#D4AF37", whiteSpace: "nowrap" }}>
-                        ${Number(item.price || 0).toFixed(2)}
+                        {formatPrice(item.price)}
                       </span>              
                     </span>              
                     <span style={{ display: "block", marginTop: "7px", fontSize: "13px", lineHeight: 1.65, color: "#8A8F98", fontStyle: "italic", fontWeight: 300 }}>{item.description}</span>              
@@ -206,7 +207,7 @@ export default function Menu() {
                   <div style={{ display: "flex", alignItems: "baseline", gap: "12px", marginTop: "6px" }}>                
                     <span style={{ flex: "1 1 auto", height: "1px", borderBottom: "1px dotted rgba(212,175,55,.55)" }}></span>                
                     <span style={{ flex: "0 0 auto", fontFamily: "'Cinzel',serif", fontSize: "16px", color: "#D4AF37", whiteSpace: "nowrap" }}>
-                      {activeItem?.price ? `$${Number(activeItem.price).toFixed(2)}` : "$0.00"}
+                      {formatPrice(activeItem?.price)}
                     </span>              
                   </div>              
                   <p style={{ margin: "10px 0 0", fontSize: "13px", lineHeight: 1.65, color: "#8A8F98", fontStyle: "italic", fontWeight: 300 }}>{activeItem?.description || "Exquisite preparation featuring seasonal components."}</p>
